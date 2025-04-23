@@ -61,7 +61,7 @@ function SearchBar() {
 
             <div className="mb-4 text-xl font-semibold text-gray-800 dark:text-white">Search Anime</div>
 
-            <div className="relative bg-primary-500/80 rounded-full mb-4 w-full">
+            <div className="relative bg-primary-500/80 rounded-full mb-4 w-full no-scrollbar">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <FaSearch className="h-4 w-4 text-white" />
               </div>

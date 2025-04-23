@@ -12,7 +12,7 @@ function AnimeCard({ data }: Props) {
       />
       <div
 
-        className="flex md:hidden group-hover:flex flex-col absolute w-full bottom-0 text-white rounded-t-[0.1rem] bg-gradient-to-t from-black/100 via-black/70  to-black/20 h-[5rem]
+        className="flex md:hidden group-hover:flex flex-col absolute w-full bottom-0 text-white rounded-t-xl bg-gradient-to-t  from-black/100 via-black/70  to-black/20 h-[5rem]
           "
       >
         <h2 className="text-lg font-bold truncate max-w-[10rem] text-center mx-auto">{data?.title?.romaji}</h2>

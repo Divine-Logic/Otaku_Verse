@@ -14,7 +14,7 @@ function Layout() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 20);
+    }, 2000);
   }, []);
 
   return isLoading
