@@ -1,6 +1,8 @@
 function Loader() {
   return (
-    <div className="relative w-24 h-24 bg-red-600 border-[6px] border-black rounded-full animate-spin-slow m-auto">
+    <div
+      className="relative w-24 h-24 bg-red-600 border-[6px] border-black rounded-full animate-spin-slow m-auto mx-auto my-auto"
+    >
       <div
         className="absolute left-1/2 top-1/2 w-14 h-14 border-4 border-[rgba(110,13,13,0.5)] rounded-full transform -translate-x-1/2 -translate-y-1/2"
       >

@@ -27,3 +27,14 @@ export type AnimeData = {
 export type Props = {
   data: AnimeData;
 };
+
+export type SliderAnimationTypes = {
+  text: string;
+  scrollContainerRef: React.RefObject<HTMLDivElement | null>;
+  className?: string;
+};
+
+export type TrendingAnimeProps = {
+  data: any[];
+  text: string;
+};
