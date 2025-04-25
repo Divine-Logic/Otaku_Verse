@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 import icon from "../assets/logo/icon.png";
 import { useTheme } from "../hooks/useTheme.tsx";
-import Card from "./Card.tsx";
 import SearchBar from "./SearchBar.tsx";
 
 function Header() {
@@ -14,11 +13,12 @@ function Header() {
   const navigate = useNavigate();
 
   return (
-    <Card
-      className="sticky top-0 z-50 flex flex-row justify-between items-center w-full bg-transparent dark:bg-transparent shadow-none rounded-md px-4 py-2"
+    <div
+      className={`sticky w-full top-0 z-50 flex flex-row justify-between items-center  shadow-none px-4  py-3 md:py-2 rounded-none ${isDark ? "bg-black" : "bg-white"}`}
+
     >
 
-      <div className="flex items-center gap-2 " onClick={() => navigate("/")}>
+      <div className="flex items-center cursor-pointer  gap-2 " onClick={() => navigate("/")}>
         <img
           src={icon}
           alt="Otaku Verse Logo"
@@ -57,7 +57,7 @@ function Header() {
         </div>
       </div>
 
-    </Card>
+    </div>
   );
 }
 

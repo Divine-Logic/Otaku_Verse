@@ -1,0 +1,53 @@
+import type { RefObject } from "react";
+
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
+import SliderAnimation from "../../../component/SliderAnimation.tsx";
+
+function RecommendingAnime({ data, text }: { data: any; text: string }) {
+  const scrollContainerRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  console.log("this is RecommendingAnime", data);
+
+  return (
+    <div className="flex flex-col gap-8 w-full">
+      <SliderAnimation
+        text={text}
+        scrollContainerRef={scrollContainerRef}
+        className="text-xl md:text-4xl font-bold text-red-500 "
+      />
+
+      <div
+        className="flex gap-6 pb-4 w-full overflow-x-auto  no-scrollbar"
+        ref={scrollContainerRef}
+      >
+        {data?.map((item: any) => (
+          <div
+            key={item.mediaRecommendation.id}
+            onClick={() => navigate(`/anime/${item.mediaRecommendation.id}`)}
+            className="min-w-64 rounded-lg  cursor-pointer  relative group "
+          >
+
+            <img
+              src={item.mediaRecommendation.coverImage.large}
+              alt={item.mediaRecommendation.title.romaji}
+              className=" object-cover w-full h-full rounded-lg"
+              loading="lazy"
+            />
+
+            <div
+              className="flex lg:hidden items-center justify-center group-hover:flex flex-col absolute w-full bottom-0 text-white rounded-t-xl rounded-b-lg bg-gradient-to-t  from-primary-500/100 via-primary-500/70  to-primary-500/20 h-[5rem] font-bold"
+            >
+
+              {item.mediaRecommendation.title.english || item.mediaRecommendation.title.romaji}
+
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default RecommendingAnime;

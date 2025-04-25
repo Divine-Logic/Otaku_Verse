@@ -1,6 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+import {
+  ANIME_DETAIL_QUERY,
+  POPULAR_ANIME_QUERY,
+  RECOMMENDATIONS_ANIME_QUERY,
+  SEARCH_ANIME_QUERY,
+  TRENDING_ANIME_QUERY,
+  UPCOMING_EPISODES_QUERY,
+} from "./GraphQlQuery.ts";
+
 const anilistApi = axios.create({
   baseURL: "https://graphql.anilist.co",
   headers: {
@@ -8,85 +17,6 @@ const anilistApi = axios.create({
     "Accept": "application/json",
   },
 });
-
-const TRENDING_ANIME_QUERY = `
-  query {
-    Page(perPage: 50) {
-      media(type: ANIME, sort: TRENDING_DESC) {
-        id
-        title {
-          romaji
-          english
-          native
-        }
-        coverImage {
-          large
-        }
-        episodes
-        averageScore
-      }
-    }
-  }
-`;
-
-const SEARCH_ANIME_QUERY = `
-  query ($search: String) {
-    Page(perPage: 20) {
-      media(search: $search, type: ANIME) {
-        id
-        title {
-          romaji
-          english
-          native
-        }
-        coverImage {
-          large
-        }
-        episodes
-        averageScore
-      }
-    }
-  }
-`;
-
-const POPULAR_ANIME_QUERY = `
-  query {
-    Page(perPage: 10) {
-      media(type: ANIME, sort: POPULARITY_DESC) {
-        id
-        title {
-          romaji
-          english
-        }
-        bannerImage
-        coverImage {
-          large
-        }
-        description(asHtml: false)
-      }
-    }
-  }
-`;
-const ANIME_DETAIL_QUERY = `
-  query ($id: Int) {
-    Media(id: $id) {
-      id
-      title {
-        romaji
-        english
-        native
-      }
-      coverImage {
-        large
-      }
-      description(asHtml: false)
-      episodes
-      genres
-      averageScore
-      bannerImage
-    }
-  }
-`;
 
 async function fetchTrendingAnime() {
   const response = await anilistApi.post("", {
@@ -110,6 +40,36 @@ async function fetchPopularAnime() {
   return response.data.data.Page.media;
 }
 
+async function fetchAnimeDetails(id: number) {
+  const response = await anilistApi.post("", {
+    query: ANIME_DETAIL_QUERY,
+    variables: { id },
+  });
+  return response.data.data.Media;
+}
+
+async function fetchRecommendAnime() {
+  const response = await anilistApi.post("", {
+    query: RECOMMENDATIONS_ANIME_QUERY,
+    // variables: { id },
+  });
+  return response.data.data.Media.recommendations.nodes;
+}
+
+async function fetchUpcomingEpisodes() {
+  const response = await anilistApi.post("", {
+    query: UPCOMING_EPISODES_QUERY,
+  });
+  return response.data.data.Page.airingSchedules.map((item: any) => ({
+    id: item.media.id,
+    title: item.media.title.english || item.media.title.romaji,
+    episode: item.episode,
+    airingAt: item.airingAt,
+    image: item.media.coverImage.large,
+    siteUrl: item.media.siteUrl,
+  }));
+}
+
 export function useTrendingAnime() {
   return useQuery({ queryKey: ["trendingAnime"], queryFn: fetchTrendingAnime });
 }
@@ -126,18 +86,25 @@ export function usePopularAnime() {
   return useQuery({ queryKey: ["popularAnime"], queryFn: fetchPopularAnime });
 }
 
-async function fetchAnimeDetails(id: number) {
-  const response = await anilistApi.post("", {
-    query: ANIME_DETAIL_QUERY,
-    variables: { id },
-  });
-  return response.data.data.Media;
-}
-
 export function useAnimeDetails(id: number) {
   return useQuery({
     queryKey: ["animeDetails", id],
     queryFn: () => fetchAnimeDetails(id),
-    enabled: !!id, // Ensures the query runs only when `id` is not falsy
+    enabled: !!id,
+  });
+}
+
+export function useRecommendAnime() {
+  return useQuery({
+    queryKey: ["recommendAnime"],
+    queryFn: () => fetchRecommendAnime(),
+    // enabled: !!id,
+  });
+}
+
+export function useUpcomingEpisodes() {
+  return useQuery({
+    queryKey: ["upcomingEpisodes"],
+    queryFn: fetchUpcomingEpisodes,
   });
 }

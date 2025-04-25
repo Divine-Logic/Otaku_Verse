@@ -49,20 +49,20 @@ function PopularAnime({ data }: { data: any }) {
           <img
             src={anime.coverImage.large}
             alt={anime.title.english || anime.title.romaji}
-            className="absolute block md:hidden w-full h-full object-cover brightness-[0.5] rounded-lg"
+            className="absolute block sm:hidden w-full h-full object-cover brightness-[0.5] rounded-lg"
           />
 
           <img
             src={anime.bannerImage}
             alt={anime.title.english || anime.title.romaji}
-            className="absolute hidden md:block w-full h-full object-cover brightness-[0.5]"
+            className="absolute hidden sm:block w-full h-full object-cover brightness-[0.5]"
           />
 
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="absolute flex flex-col items-start  px-6 sm:px-12 text-white max-w-2xl  gap-[1rem] mt-[18rem]"
+            className="absolute flex flex-col items-start  px-6 sm:px-12 text-white max-w-2xl  gap-[1rem] sm:mt-[15rem] mt-[18rem]"
           >
             <motion.h2
               initial={{ y: 20, opacity: 0 }}
@@ -79,7 +79,7 @@ function PopularAnime({ data }: { data: any }) {
               transition={{ delay: 0.4, duration: 0.5 }}
               className="text-start text-sm sm:text-base drop-shadow line-clamp-3 "
             >
-              {anime.description}
+              {anime.description.replace(/<[^>]+>/g, "")}
             </motion.p>
 
             <motion.a
@@ -87,7 +87,7 @@ function PopularAnime({ data }: { data: any }) {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
               href={`/anime/${anime.id}`}
-              className=" inline-block bg-primary-500 px-4 py-2 rounded text-white w-fit hover:bg-primary-500/80 transition-colors"
+              className=" inline-block bg-primary-500 px-4 py-2 rounded-lg text-white w-fit hover:bg-primary-500/80 transition-colors"
             >
               View Details
             </motion.a>
