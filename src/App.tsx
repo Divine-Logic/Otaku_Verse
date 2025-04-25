@@ -12,7 +12,7 @@ function App() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const navType = performance.getEntriesByType("navigation")[0].type;
+    const navType: any = performance.getEntriesByType("navigation")[0].entryType;
     const hasShownSplash = sessionStorage.getItem("hasShownSplash");
 
     if (!hasShownSplash || navType === "reload") {

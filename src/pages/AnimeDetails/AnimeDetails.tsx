@@ -14,17 +14,17 @@ function AnimeDetails() {
   const { id } = useParams();
   const { data, isLoading, isError } = useAnimeDetails(id);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  console.log("this is animedetails", data);
+  // console.log("this is animedetails", data);
 
   return (
-    <Card className={`bg-transparent ${isDark ? "text-white" : "text-black"} px-4 sm:px-6 py-6`}>
+    <Card className={`bg-transparent ${isDark ? "text-white" : "text-black"}  `}>
       {isLoading
         ? (
             <Loader />
           )
         : isError
           ? (
-              <div className="text-center text-red-500 mt-10">
+              <div className="text-center text-primary-500 mt-10">
                 Failed to load anime details
               </div>
             )
@@ -38,7 +38,7 @@ function AnimeDetails() {
                           url={`https://www.youtube.com/embed/${data.trailer.id}`}
                           playing={false}
                           width="100%"
-                          pip={true}
+                          pip={false}
                           className="rounded-lg overflow-hidden aspect-video"
                         />
                       )
@@ -56,7 +56,7 @@ function AnimeDetails() {
                   <img
                     src={data?.coverImage?.large}
                     alt={data?.title?.english}
-                    className="w-full max-h-[25rem] md:max-h-full object-cover shadow-md mx-auto rounded-lg"
+                    className="w-full max-w-[30rem] max-h-[25rem] md:max-h-full object-cover shadow-md mx-auto rounded-lg"
                   />
 
                   <div className="flex flex-col items-start justify-start gap-4 md:gap-5 w-full">

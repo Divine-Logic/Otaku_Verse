@@ -30,7 +30,7 @@ export type Props = {
 
 export type SliderAnimationTypes = {
   text: string;
-  scrollContainerRef: React.RefObject<HTMLDivElement>;
+  scrollContainerRef: React.RefObject<HTMLDivElement | null>;
   className?: string;
 };
 

@@ -40,7 +40,7 @@ async function fetchPopularAnime() {
   return response.data.data.Page.media;
 }
 
-async function fetchAnimeDetails(id: number) {
+async function fetchAnimeDetails(id: string | undefined) {
   const response = await anilistApi.post("", {
     query: ANIME_DETAIL_QUERY,
     variables: { id },
@@ -86,7 +86,7 @@ export function usePopularAnime() {
   return useQuery({ queryKey: ["popularAnime"], queryFn: fetchPopularAnime });
 }
 
-export function useAnimeDetails(id: number) {
+export function useAnimeDetails(id: string | undefined) {
   return useQuery({
     queryKey: ["animeDetails", id],
     queryFn: () => fetchAnimeDetails(id),

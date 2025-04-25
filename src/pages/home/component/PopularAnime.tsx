@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Card from "../../../component/Card.tsx";
 
@@ -7,6 +8,8 @@ function PopularAnime({ data }: { data: any }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isAutoPlaying] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!data || data.length === 0)
@@ -44,6 +47,7 @@ function PopularAnime({ data }: { data: any }) {
           animate={{ x: 0 }}
           exit={{ x: "-100%" }}
           transition={{ duration: 1 }}
+          onClick={() => navigate(`/anime/${anime.id}`)}
           className="absolute  w-full h-full "
         >
           <img

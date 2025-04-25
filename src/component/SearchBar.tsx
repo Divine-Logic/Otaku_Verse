@@ -38,7 +38,7 @@ function SearchBar() {
       <button
         type="button"
         onClick={togglePopup}
-        className="flex items-center justify-center p-2 bg-primary-500/80 rounded-full hover:bg-primary-500 transition-colors duration-200"
+        className="flex items-center justify-center p-2 bg-primary-500 rounded-full hover:bg-primary-500/80 transition-colors duration-200"
       >
         <FaSearch className="h-5 w-5 text-white" />
       </button>
@@ -79,7 +79,10 @@ function SearchBar() {
 
             {isLoading
               ? (
-                  <div className="animate-spin rounded-full h-11 w-11 border-b-2 border-primary-500"></div>
+                  <div
+                    className="animate-spin rounded-full h-11 w-11 border-b-2 border-primary-500"
+                  >
+                  </div>
                 )
               : isError
                 ? (

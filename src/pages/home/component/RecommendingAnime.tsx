@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 import SliderAnimation from "../../../component/SliderAnimation.tsx";
 
 function RecommendingAnime({ data, text }: { data: any; text: string }) {
-  const scrollContainerRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const scrollContainerRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  console.log("this is RecommendingAnime", data);
+  // console.log("this is RecommendingAnime", data);
 
   return (
     <div className="flex flex-col gap-8 w-full">

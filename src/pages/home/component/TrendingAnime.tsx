@@ -8,7 +8,7 @@ import Card from "../../../component/Card";
 import SliderAnimation from "../../../component/SliderAnimation";
 
 function TrendingAnime({ data, text }: TrendingAnimeProps) {
-  const scrollContainerRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const scrollContainerRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   return (

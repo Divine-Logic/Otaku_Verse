@@ -18,15 +18,14 @@ function HomePage() {
   console.log("this is upcomingEpi", upcommingEpi);
 
   return (
-    <Card className="overflow-x-auto bg-transparent flex flex-col gap-[1rem] md:gap-[2rem] max-w-screen">
+    <Card className=" bg-transparent flex flex-col gap-[1rem] md:gap-[2rem] max-w-screen">
 
       <PopularAnime data={popularData} />
 
       <RecommendingAnime data={recommendData} text="Recommending Anime" />
+      <UpcomingEpisodes data={upcommingEpi} text="Upcoming Episodes" />
 
       <TrendingAnime data={trendingData} text="Trending Anime" />
-
-      <UpcomingEpisodes data={upcommingEpi} text="Upcoming Episodes" />
 
     </Card>
   );
