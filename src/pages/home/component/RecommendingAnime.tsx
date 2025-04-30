@@ -3,6 +3,7 @@ import type { RefObject } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+import AnimeCard from "../../../component/AnimeCard.tsx";
 import SliderAnimation from "../../../component/SliderAnimation.tsx";
 
 function RecommendingAnime({ data, text }: { data: any; text: string }) {
@@ -28,21 +29,11 @@ function RecommendingAnime({ data, text }: { data: any; text: string }) {
             onClick={() => navigate(`/anime/${item.mediaRecommendation.id}`)}
             className="min-w-64 rounded-lg  cursor-pointer  relative group "
           >
-
-            <img
-              src={item.mediaRecommendation.coverImage.large}
-              alt={item.mediaRecommendation.title.romaji}
-              className=" object-cover w-full h-full rounded-lg"
-              loading="lazy"
+            <AnimeCard
+              img={item.mediaRecommendation.coverImage.large}
+              title1={item.mediaRecommendation.title.english}
+              title2={item.mediaRecommendation.title.romaji}
             />
-
-            <div
-              className="flex lg:hidden items-center justify-center group-hover:flex flex-col absolute w-full bottom-0 text-white rounded-t-xl rounded-b-lg bg-gradient-to-t  from-primary-500/100 via-primary-500/70  to-primary-500/20 h-[5rem] font-bold"
-            >
-
-              {item.mediaRecommendation.title.english || item.mediaRecommendation.title.romaji}
-
-            </div>
           </div>
         ))}
       </div>

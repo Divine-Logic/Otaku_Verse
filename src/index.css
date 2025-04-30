@@ -16,26 +16,26 @@
         display: none;
     }
 
-    /*.scrollbar::-webkit-scrollbar-thumb {*/
-    /*    !*border-radius: 5px;*!*/
-    /*    !*background: rgba(0, 0, 0, 0.35);*!*/
-    /*}*/
-    /*.scrollbar::-webkit-scrollbar-corner {*/
-    /*    background: transparent;*/
-    /*} */
-    .scrollbar1 ::-webkit-scrollbar-thumb {
-        background: red;
-        border-radius: 10px;
 
+    .scrollbar1 {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-primary-500) transparent;
+        overflow-y: scroll;
     }
 
-    .scrollbar1::-webkit-scrollbar-track {
-        width: 20px;
-        box-shadow: inset 0 0 5px grey;
-        border-radius: 10px;
 
+    .scrollbar1::-webkit-scrollbar-thumb {
+        background-color: var(--color-primary-500);
+        border-radius: 10px;
+        border: 2px solid transparent;
+        background-clip: content-box;
     }
 
+    .scrollbar1::-webkit-scrollbar-button {
+        display: none;
+        width: 0;
+        height: 0;
+    }
 
     .no-scrollbar {
         -ms-overflow-style: none; /* IE and Edge */
