@@ -47,10 +47,7 @@ function SearchBar() {
       setSearchQuery("");
       setSelectedGenres([]);
       setScoreRange(SCORE_RANGES[0]);
-      setShowFilters(false);
-    }
-    else {
-      document.body.style.overflow = "hidden";
+      setShowFilters(true);
     }
   };
 
