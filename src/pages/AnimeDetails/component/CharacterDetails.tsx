@@ -104,9 +104,7 @@ function CharacterDetails({ isOpen, onClose, characterId }: CharacterDetailsProp
                                 <CharacterCard
                                   key={`${edge.node?.id}-${index}`}
                                   data={edge}
-                                  onClick={
-                                    handleCardClick
-                                  }
+                                  onClick={() => handleCardClick(edge.node?.id)}
                                   keys={{
                                     id: "node.id",
                                     titleEnglish: "node.title.english",

@@ -37,13 +37,13 @@ export type Props = {
 };
 
 export type SliderAnimationTypes = {
-  text: string | null;
+  text?: string | null;
   scrollContainerRef: React.RefObject<HTMLDivElement | null>;
   className?: string;
 };
 
 export type TrendingAnimeProps = {
-  data?: any[];
+  data?: undefined | any[];
   text?: string;
 };
 
@@ -62,7 +62,7 @@ export type SearchAnimeCardProps = {
   title1?: string;
   title2?: string;
   rating?: number;
-  genration?: string[];
+  genration?: string[] | undefined;
 };
 
 export type CharacterDetailsProps = {
@@ -93,8 +93,8 @@ export type DynamicCharacterCardProps = {
     titleEnglish: string;
     titleRomaji: string;
     coverImage: string;
-    voiceActorImage?: string;
-    voiceActorName?: string;
+    voiceActorImage?: string | undefined;
+    voiceActorName?: string | undefined;
   };
   onClick: (id: number | string) => void;
 };

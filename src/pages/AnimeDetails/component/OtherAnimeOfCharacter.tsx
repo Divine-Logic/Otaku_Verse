@@ -3,7 +3,7 @@ import { get } from "lodash";
 import type { DynamicCharacterCardProps } from "../../../lib/types/Types";
 
 function CharacterCard({ data, keys, onClick }: DynamicCharacterCardProps) {
-  const animeId = get(data, keys.id);
+  const animeId = keys.id ? get(data, keys.id) : undefined;
   const title
         = get(data, keys.titleEnglish) || get(data, keys.titleRomaji) || "";
   const coverImage = get(data, keys.coverImage) || "/api/placeholder/180/270";
