@@ -12,6 +12,17 @@ function PopularAnime({ data }: { data: any }) {
   const navigate = useNavigate();
   const pauseTimeout = useRef<NodeJS.Timeout | null>(null);
 
+  const slide = (dir: number) => {
+    setDirection(dir);
+    setIndex((prev) => {
+      const newIndex = prev + dir;
+      if (newIndex >= data.length)
+        return 0;
+      if (newIndex < 0)
+        return data.length - 1;
+      return newIndex;
+    });
+  };
   useEffect(() => {
     if (!data || data.length === 0)
       return;
@@ -24,18 +35,6 @@ function PopularAnime({ data }: { data: any }) {
 
     return () => clearInterval(interval);
   }, [data, isAutoPlaying]);
-
-  const slide = (dir: number) => {
-    setDirection(dir);
-    setIndex((prev) => {
-      const newIndex = prev + dir;
-      if (newIndex >= data.length)
-        return 0;
-      if (newIndex < 0)
-        return data.length - 1;
-      return newIndex;
-    });
-  };
 
   const handleManualSlide = (dir: number) => {
     slide(dir);

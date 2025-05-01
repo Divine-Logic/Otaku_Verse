@@ -82,18 +82,16 @@ function AnimeDetails() {
                     </h1>
 
                     <div className="flex  items-start flex-col gap-2 sm:gap-4">
-                      <p className="flex items-center gap-1 text-gray-400 text-sm sm:text-base md:text-lg font-bold">
+                      <p className="flex items-center gap-1 text-primary-500 text-sm sm:text-base md:text-lg font-bold">
                         {`Release Year: ${data?.seasonYear || "N/A"}`}
                       </p>
-                      <p className="flex items-center gap-1 text-primary-500 text-sm sm:text-base md:text-lg">
-                        <AiFillStar
-                          className="text-yellow-400"
-                        />
+                      <p className="flex items-center gap-1 font-bold text-yellow-400 text-sm  sm:text-lg tracking-wide">
+                        <AiFillStar />
                         {data?.averageScore
-                          ? `${data.averageScore} / 100`
+                          ? `${(data.averageScore / 10).toFixed(1)}/10`
                           : "N/A"}
                       </p>
-                      <p className="text-sm sm:text-base md:text-lg text-gray-400">
+                      <p className="text-sm sm:text-base md:text-lg text-white">
                         {`Episodes: ${data?.episodes || "N/A"}`}
                       </p>
                     </div>

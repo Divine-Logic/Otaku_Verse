@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useSearchAnime } from "../services/product/Api";
 import Card from "./Card";
-import Filter from "./Filter";
+import Filter from "./Filter.tsx";
 import Loader from "./Loader.tsx";
 import SearchAnimeCard from "./SearchAnimeCard";
 

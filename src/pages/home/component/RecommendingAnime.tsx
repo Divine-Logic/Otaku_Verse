@@ -16,7 +16,7 @@ function RecommendingAnime({ data, text }: { data: any; text: string }) {
       <SliderAnimation
         text={text}
         scrollContainerRef={scrollContainerRef}
-        className="text-xl md:text-4xl font-bold text-red-500 "
+        className="text-xl md:text-4xl font-bold text-primary-500 "
       />
 
       <div

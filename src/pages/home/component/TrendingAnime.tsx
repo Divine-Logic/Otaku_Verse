@@ -13,11 +13,11 @@ function TrendingAnime({ data, text }: TrendingAnimeProps) {
   // console.log("trendingAnime", data);
 
   return (
-    <Card className=" bg-transparent gap-4 flex flex-col py-3 w-full overflow-x-auto">
+    <Card className=" bg-transparent gap-4 flex flex-col  w-full overflow-x-auto">
       <SliderAnimation
         text={text}
         scrollContainerRef={scrollContainerRef}
-        className="text-xl md:text-3xl font-bold text-red-500 w-full justify-between"
+        className="text-xl md:text-3xl font-bold text-primary-500 w-full justify-between"
       />
       <div ref={scrollContainerRef} className="overflow-x-auto no-scrollbar w-full">
         <div className="flex gap-5 items-center pr-10">

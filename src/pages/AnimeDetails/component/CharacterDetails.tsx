@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
-import type { CharacterDetailsProps } from "../../../lib/types/Types.ts";
+import type { CharacterDetailsProps } from "../../../lib/types/Types";
 
 import Loader from "../../../component/Loader";
 import { useCharacterDetails } from "../../../services/product/Api";
+import CharacterCard from "./OtherAnimeOfCharacter";
 
 function CharacterDetails({ isOpen, onClose, characterId }: CharacterDetailsProps) {
   const { data, isLoading, isError } = useCharacterDetails(characterId);
   const [isMore, setIsMore] = useState(false);
-  console.log("this is character details", data);
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!isOpen)
       return;
@@ -25,10 +28,15 @@ function CharacterDetails({ isOpen, onClose, characterId }: CharacterDetailsProp
     setIsMore(!isMore);
   };
 
+  const handleCardClick = (id: number) => {
+    navigate(`/anime/${id}`);
+    onClose();
+  };
+
   return (
-    <div className="fixed z-50 inset-0 backdrop-blur-sm scrollbar1">
-      <div className="fixed inset-0 bg-black/60" onClick={onClose} />
-      <div className="fixed inset-0 flex items-center justify-center p-4">
+    <div className="fixed z-50 inset-0 backdrop-blur-sm scrollbar1 rounded-lg">
+      <div className="fixed inset-0 bg-black/60 rounded-lg" onClick={onClose} />
+      <div className="fixed inset-0 flex items-center justify-center p-4 rounded-lg">
         <div
           className="bg-primary-700 p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-xl"
           onClick={e => e.stopPropagation()}
@@ -39,45 +47,41 @@ function CharacterDetails({ isOpen, onClose, characterId }: CharacterDetailsProp
               )
             : isError
               ? (
-                  <div className="text-center text-red-500 py-8">
-                    Failed to load character details
-                  </div>
+                  <div className="text-center text-red-500 py-8">Failed to load character details</div>
                 )
               : !data
                   ? (
-                      <div className="text-center text-primary-500 py-8">
-                        No character data found
-                      </div>
+                      <div className="text-center text-primary-500 py-8">No character data found</div>
                     )
                   : (
                       <div className="flex flex-col gap-8 rounded-lg">
-                        <div className="flex justify-between items-center  ">
-                          <h2 className="text-2xl font-bold text-primary-500">
-                            Character Details
-                          </h2>
-
+                        <div className="flex justify-between items-center">
+                          <h2 className="text-2xl font-bold text-primary-500">Character Details</h2>
                           <IoMdClose
                             size={24}
                             onClick={onClose}
-                            className=" rounded-full text-primary-500 hover:text-primary-500/60"
+                            className="rounded-full text-primary-500 hover:text-primary-500/60"
                           />
-
                         </div>
 
                         <div
-                          className="flex flex-col sm:flex-row gap-6 text-start max-h-[20rem] overflow-y-auto no-scrollbar relative"
+                          className="flex flex-col sm:flex-row gap-6 text-start max-h-full overflow-y-auto relative"
                         >
                           <img
                             src={data.image?.large}
                             alt={data.name?.full}
-                            className="w-[15rem] h-[15rem] mx-auto sm:w-[20rem] sm:h-[20rem] object-cover rounded-lg shadow-md"
+                            className="w-[15rem] h-[15rem] mx-auto sm:w-[20rem] sm:h-[20rem] object-cover rounded-lg shadow-md sticky z-20"
                           />
-                          <div className="flex flex-col">
+                          <div className="flex flex-col overflow-y-auto h-[20rem] no-scrollbar">
                             <h2 className="text-3xl font-bold text-primary-500 mb-2 mx-auto sm:mx-0">
                               {data.name?.full}
                             </h2>
                             <div className="relative">
-                              <p className={`text-sm text-start text-gray-300 whitespace-pre-line ${!isMore ? "line-clamp-4" : ""}`}>
+                              <p
+                                className={`text-sm text-start text-gray-300 whitespace-pre-line ${
+                                  !isMore ? "line-clamp-4" : ""
+                                }`}
+                              >
                                 {data.description?.replace(/<[^>]+>/g, "") || "No description available."}
                               </p>
                               {data.description?.length > 500 && (
@@ -94,41 +98,24 @@ function CharacterDetails({ isOpen, onClose, characterId }: CharacterDetailsProp
 
                         {data.media?.edges?.length > 0 && (
                           <div className="flex flex-col gap-4 text-start">
-                            <h3 className="text-xl font-bold  text-primary-500 ">
-                              Other Anime
-                            </h3>
+                            <h3 className="text-xl font-bold text-primary-500">Other Anime</h3>
                             <div className="flex flex-col gap-4">
                               {data.media.edges.map((edge: any, index: number) => (
-
-                                <div
+                                <CharacterCard
                                   key={`${edge.node?.id}-${index}`}
-                                  className="bg-primary-600 flex gap-8 items-center
-                                  max-h-[10rem]  rounded-lg
-                                  "
-                                >
-                                  <img
-                                    src={edge.node?.coverImage?.large}
-                                    alt="Not Found"
-                                    className=" object-cover rounded-md max-h-[10rem]  w-[8rem]"
-                                  />
-                                  <div className="flex flex-col gap-6 p-4">
-                                    <p className="font-light sm:font-bold text-white line-clamp-2 ">
-                                      {edge.node?.title?.english || edge.node?.title?.romaji}
-                                    </p>
-                                    {edge.voiceActors?.length > 0 && (
-                                      <div className="flex items-center gap-3">
-                                        <img
-                                          src={edge.voiceActors[0]?.image?.large}
-                                          alt={edge.voiceActors[0]?.name?.full}
-                                          className="w-10 h-10 object-cover rounded-full border-2"
-                                        />
-                                        <p className="text-sm text-white">
-                                          {edge.voiceActors[0]?.name?.full}
-                                        </p>
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
+                                  data={edge}
+                                  onClick={
+                                    handleCardClick
+                                  }
+                                  keys={{
+                                    id: "node.id",
+                                    titleEnglish: "node.title.english",
+                                    titleRomaji: "node.title.romaji",
+                                    coverImage: "node.coverImage.large",
+                                    voiceActorImage: "voiceActors[0].image.large",
+                                    voiceActorName: "voiceActors[0].name.full",
+                                  }}
+                                />
                               ))}
                             </div>
                           </div>

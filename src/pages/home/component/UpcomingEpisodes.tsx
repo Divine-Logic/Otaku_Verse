@@ -11,7 +11,7 @@ function UpcomingEpisodes({ text }: { text: string | null }) {
     <div className="flex flex-col gap-[2rem]">
       <SliderAnimation
         scrollContainerRef={scrollContainerRef}
-        className="text-xl md:text-3xl font-bold text-red-500 w-full justify-between"
+        className="text-xl md:text-3xl font-bold text-primary-500 w-full justify-between"
         text={text}
       />
       <div

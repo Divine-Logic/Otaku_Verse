@@ -16,31 +16,18 @@ function SliderAnimation({ text, scrollContainerRef, className }: SliderAnimatio
   };
 
   const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -600, behavior: "smooth" });
-    }
+    scrollContainerRef.current?.scrollBy({ left: -600, behavior: "smooth" });
   };
 
   const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 600, behavior: "smooth" });
-    }
+    scrollContainerRef.current?.scrollBy({ left: 600, behavior: "smooth" });
   };
 
   useEffect(() => {
     updateArrows();
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener("scroll", updateArrows);
-      window.addEventListener("resize", updateArrows);
-    }
-    return () => {
-      if (container) {
-        container.removeEventListener("scroll", updateArrows);
-        window.removeEventListener("resize", updateArrows);
-      }
-    };
-  }, [scrollContainerRef]);
+    scrollContainerRef.current?.addEventListener("scroll", updateArrows);
+    window.addEventListener("resize", updateArrows);
+  }, []);
 
   return (
     <div className={`flex justify-between items-center ${className}`}>

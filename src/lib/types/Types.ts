@@ -43,8 +43,8 @@ export type SliderAnimationTypes = {
 };
 
 export type TrendingAnimeProps = {
-  data: any[];
-  text: string;
+  data?: any[];
+  text?: string;
 };
 
 export type FilterOptionProps = {
@@ -56,17 +56,45 @@ export type FilterOptionProps = {
 };
 
 export type SearchAnimeCardProps = {
-  key: number;
-  img: string;
+  key?: number;
+  img?: string;
   handleCardClick: () => void;
   title1?: string;
   title2?: string;
-  rating: number;
-  genration: string[];
+  rating?: number;
+  genration?: string[];
 };
 
 export type CharacterDetailsProps = {
   isOpen: boolean;
   onClose: () => void;
   characterId: number;
+};
+
+export type CharacterCardProps = {
+  anime: {
+    node?: {
+      id?: number | string;
+      coverImage?: { large?: string };
+      title?: string;
+    };
+    voiceActors?: {
+      image?: { large?: string };
+      name?: { full?: string };
+    }[];
+  };
+  onClick: (id?: number | string) => void;
+};
+
+export type DynamicCharacterCardProps = {
+  data: any;
+  keys: {
+    id: string;
+    titleEnglish: string;
+    titleRomaji: string;
+    coverImage: string;
+    voiceActorImage?: string;
+    voiceActorName?: string;
+  };
+  onClick: (id: number | string) => void;
 };
