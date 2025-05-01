@@ -1,16 +1,18 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 
 import SliderAnimation from "../../../component/SliderAnimation.tsx";
+import { useUpcomingEpisodes } from "../../../services/product/Api.ts";
 
-function UpcomingEpisodes({ data, text }: { data: any[]; text: string }) {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+function UpcomingEpisodes({ text }: { text: string | null }) {
+  const scrollContainerRef: React.RefObject<HTMLDivElement | null> = useRef(null);
+  const { data } = useUpcomingEpisodes();
 
   return (
     <div className="flex flex-col gap-[2rem]">
       <SliderAnimation
-        text={text}
         scrollContainerRef={scrollContainerRef}
-        className="text-xl md:text-3xl font-bold text-red-500 w-full justify-between"
+        className="text-xl md:text-3xl font-bold text-primary-500 w-full justify-between"
+        text={text}
       />
       <div
         ref={scrollContainerRef}
@@ -19,6 +21,7 @@ function UpcomingEpisodes({ data, text }: { data: any[]; text: string }) {
         {data?.map((item: any) => (
           <div
             key={item.id}
+
             className="flex gap-[1rem] min-w-[22rem] h-full md:min-w-[25rem] cursor-pointer bg-gradient-to-l from-primary-600/100 via-primary-560/80 to-primary-600/60 rounded-lg"
           >
             <img

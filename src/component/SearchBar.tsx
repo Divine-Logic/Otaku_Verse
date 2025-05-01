@@ -1,88 +1,168 @@
-import { useState } from "react";
-import { AiFillStar } from "react-icons/ai";
-import { FaSearch } from "react-icons/fa";
+import { useMemo, useState } from "react";
+import { FaFilter, FaSearch } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
-import { useSearchAnime } from "../services/product/Api.ts";
-import Card from "./Card.tsx";
+import { useSearchAnime } from "../services/product/Api";
+import Card from "./Card";
+import Filter from "./Filter.tsx";
+import Loader from "./Loader.tsx";
+import SearchAnimeCard from "./SearchAnimeCard";
+
+const GENRE_OPTIONS = [
+  "Action",
+  "Adventure",
+  "Comedy",
+  "Drama",
+  "Fantasy",
+  "Horror",
+  "Mystery",
+  "Romance",
+  "Sci-Fi",
+  "Slice of Life",
+];
+
+const SCORE_RANGES = [
+  { label: "All Scores", min: 0, max: 100 },
+  { label: "90+", min: 90, max: 100 },
+  { label: "80-89", min: 80, max: 89 },
+  { label: "70-79", min: 70, max: 79 },
+  { label: "< 70", min: 0, max: 69 },
+];
 
 function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [scoreRange, setScoreRange] = useState(SCORE_RANGES[0]);
   const { data, isLoading, isError } = useSearchAnime(searchQuery);
   const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
 
-  const togglePopup = () => {
-    setIsPopupOpen(!isPopupOpen);
-    if (!isPopupOpen) {
-      document.body.style.overflow = "hidden";
-    }
-    else {
-      document.body.style.overflow = "auto";
+  const openModal = () => {
+    setIsPopupOpen(prev => !prev);
+    if (isPopupOpen) {
       setSearchQuery("");
+      setSelectedGenres([]);
+      setScoreRange(SCORE_RANGES[0]);
+      setShowFilters(true);
     }
   };
 
-  const handleCardClick = (id: number) => {
-    togglePopup();
+  const toggleGenre = (genre: string) => {
+    setSelectedGenres(prev =>
+      prev.includes(genre) ? prev.filter(g => g !== genre) : [...prev, genre],
+    );
+  };
+
+  const handleCardClick = (id: number) => () => {
+    setIsPopupOpen(prev => !prev);
+    setSearchQuery("");
     navigate(`/anime/${id}`);
   };
 
+  const handleScoreRangeSelect = (selectedOption: { label: string }) => {
+    const newScoreRange = SCORE_RANGES.find(range => range.label === selectedOption.label);
+    if (newScoreRange) {
+      setScoreRange(newScoreRange);
+    }
+  };
+
+  const toggleFilters = () => setShowFilters(prev => !prev);
+
+  const clearFilters = () => {
+    setSelectedGenres([]);
+    setScoreRange(SCORE_RANGES[0]);
+  };
+
+  const filteredAnime = useMemo(() => {
+    if (!data)
+      return [];
+    return data.filter((anime: { averageScore: number; genres: string[] }) => {
+      const scoreMatch = anime.averageScore >= scoreRange.min && anime.averageScore <= scoreRange.max;
+      const genreMatch = selectedGenres.length === 0 || selectedGenres.every(genre => anime.genres?.includes(genre));
+      return scoreMatch && genreMatch;
+    });
+  }, [data, scoreRange, selectedGenres]);
+
   return (
-    <Card className="bg-transparent no-scrollbar">
+    <Card className="bg-transparent no-scrollbar w-full ">
       <button
-        type="button"
-        onClick={togglePopup}
+        onClick={openModal}
         className="flex items-center justify-center p-2 bg-primary-500 rounded-full hover:bg-primary-500/80 transition-colors duration-200"
       >
         <FaSearch className="h-5 w-5 text-white" />
       </button>
 
       {isPopupOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-20">
-          <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={togglePopup}
-          >
-          </div>
-
-          <Card className="z-60 w-full max-w-2xl bg-white dark:bg-primary-700/75 p-4 rounded-lg relative ">
+        <div
+          className="fixed inset-0.5 z-50 flex items-start justify-center p-20 text-white backdrop-blur-sm w-full  "
+        >
+          <Card className="z-60 w-full max-w-3xl bg-primary-700/75 p-4 rounded-lg relative gap-8">
             <button
-              type="button"
-              onClick={togglePopup}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              onClick={openModal}
+              className="absolute top-3 right-3 text-primary-500 hover:text-primary-500/60"
             >
               <IoMdClose className="h-6 w-6" />
             </button>
 
-            <div className="mb-4 text-xl font-semibold text-gray-800 dark:text-white">
-              Search Anime
+            <div className="text-xl font-semibold">Search Anime</div>
+
+            <div className="flex items-center gap-8 w-full mt-4">
+              <div className="relative bg-primary-500/80 rounded-lg w-full flex items-center gap-6 p-4">
+                <FaSearch size={24} />
+                <input
+                  type="text"
+                  placeholder="Search For Anime"
+                  value={searchQuery}
+                  onChange={handleChange}
+                  className="w-full rounded-lg bg-transparent outline-none text-white"
+                  autoFocus={true}
+                />
+              </div>
+              <button
+                onClick={toggleFilters}
+                className={`p-3 rounded-lg ${showFilters ? "bg-primary-500" : "bg-primary-500/80"} hover:bg-primary-600`}
+              >
+                <FaFilter size={24} />
+              </button>
             </div>
 
-            <div className="relative bg-primary-500/80 rounded-lg mb-4 w-full scrollbar">
-              <FaSearch className="h-5 w-5 text-white absolute mt-[1rem] ml-[0.5rem]" />
-
-              <input
-                type="text"
-                placeholder="Search Anime"
-                value={searchQuery}
-                onChange={handleChange}
-                className="w-full pl-10 pr-4 py-3 rounded-lg bg-transparent focus:ring-2 transition-all duration-200 outline-none text-white"
-                autoFocus
-              />
-            </div>
+            {showFilters && (
+              <div className="rounded-lg p-3 mb-4 w-full">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-white font-medium">Filters</h3>
+                  <button
+                    onClick={clearFilters}
+                    className="text-xs text-primary-200 hover:text-white transition-colors"
+                  >
+                    Clear all
+                  </button>
+                </div>
+                <div className="flex flex-col gap-8">
+                  <Filter
+                    title="Category"
+                    options={GENRE_OPTIONS}
+                    selected={selectedGenres}
+                    onSelect={toggleGenre}
+                    isCategory
+                  />
+                  <Filter
+                    title="Rating"
+                    options={SCORE_RANGES}
+                    selected={[scoreRange]}
+                    onSelect={handleScoreRangeSelect}
+                    isCategory={false}
+                  />
+                </div>
+              </div>
+            )}
 
             {isLoading
               ? (
-                  <div
-                    className="animate-spin rounded-full h-11 w-11 border-b-2 border-primary-500"
-                  >
-                  </div>
+                  <Loader />
                 )
               : isError
                 ? (
@@ -90,48 +170,36 @@ function SearchBar() {
                       Error fetching anime data
                     </div>
                   )
-                : data && data?.length > 0
+                : filteredAnime.length > 0
                   ? (
-                      <div
-                        className="anime-results max-h-96 w-full overflow-y-auto mt-2 space-y-3 text-white scrollbar1"
-                      >
-                        {data.map((anime: any) => (
-                          <div
-                            key={anime?.id}
-                            onClick={() => handleCardClick(anime?.id)}
-                            className="flex items-center space-x-4 p-2 hover:bg-primary-500/50 rounded-md transition-colors duration-200 cursor-pointer"
-                          >
-                            <img
-                              src={anime?.coverImage?.large}
-                              alt={anime?.title?.english}
-                              className="h-20 w-16 object-cover rounded-md shadow-sm"
-                            />
-                            <div className="flex flex-col text-start max-w-xs">
-                              {anime?.title?.english
-                                ? (
-                                    <h3 className="font-medium">{anime?.title?.english}</h3>
-                                  )
-                                : (
-                                    <h3 className="font-medium">{anime?.title?.romaji}</h3>
-                                  )}
-                              <div className="flex items-center mt-1">
-                                <div
-                                  className="flex items-center bg-primary-100 text-primary-800 text-xs font-medium px-2 py-1 rounded-full"
-                                >
-                                  <AiFillStar className="text-yellow-500 mr-1 text-xl" />
-                                  {anime?.averageScore}
-                                </div>
-                              </div>
-                            </div>
+                      <div className="w-full ">
+                        {searchQuery && (
+                          <div className="text-sm text-gray-400 mb-2">
+                            {`${filteredAnime.length} ${filteredAnime.length === 1 ? "result" : "results"} found`}
                           </div>
-                        ))}
+                        )}
+                        <div
+                          className=" max-h-96 w-full overflow-y-auto mt-2 text-white
+                           gap-8 scrollbar1"
+                        >
+                          {filteredAnime.map((anime: any, index: number) => (
+
+                            <SearchAnimeCard
+                              key={index}
+                              img={anime?.coverImage?.large}
+                              handleCardClick={handleCardClick(anime?.id)}
+                              title1={anime?.title?.english}
+                              title2={anime?.title?.romaji}
+                              rating={anime?.averageScore}
+                              genration={anime?.genres}
+                            />
+                          ))}
+                        </div>
                       </div>
                     )
                   : (
                       <div className="text-center p-4 text-gray-500 dark:text-gray-400">
-                        No results found
-                        {" "}
-                        {searchQuery}
+                        {searchQuery ? `No results found for "${searchQuery}"` : "Enter anime name"}
                       </div>
                     )}
           </Card>

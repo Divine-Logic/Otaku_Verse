@@ -16,26 +16,25 @@
         display: none;
     }
 
-    /*.scrollbar::-webkit-scrollbar-thumb {*/
-    /*    !*border-radius: 5px;*!*/
-    /*    !*background: rgba(0, 0, 0, 0.35);*!*/
-    /*}*/
-    /*.scrollbar::-webkit-scrollbar-corner {*/
-    /*    background: transparent;*/
-    /*} */
-    .scrollbar1 ::-webkit-scrollbar-thumb {
-        background: red;
-        border-radius: 10px;
-
+    .scrollbar1 {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-primary-500) transparent;
+        overflow-y: scroll;
     }
 
-    .scrollbar1::-webkit-scrollbar-track {
-        width: 20px;
-        box-shadow: inset 0 0 5px grey;
-        border-radius: 10px;
 
+    .scrollbar1::-webkit-scrollbar-thumb {
+        background-color: var(--color-primary-500);
+        border-radius: 10px;
+        border: 2px solid transparent;
+        background-clip: content-box;
     }
 
+    .scrollbar1::-webkit-scrollbar-button {
+        display: none;
+        width: 0;
+        height: 0;
+    }
 
     .no-scrollbar {
         -ms-overflow-style: none; /* IE and Edge */
@@ -84,10 +83,21 @@
     /*--color-black: #000000;*/
     --color-white: #ffffff;
 
-    --color-primary-700: #4D1520;
-    --color-primary-600: #971a20;
-    --color-primary-500: #e31a24;
-
+    /*Theme red*/
+    /*--color-primary-600: #971a20;*/
+    /*--color-primary-500: #e31a24;*/
+    /*--color-primary-700: #4D1520;*/
+    /*theme green*/
+    --color-primary-700: #001e25;
+    --color-primary-600: #115039;
+    --color-primary-500: #38bb8c;
+    /*theme light green*/
+    /*--color-primary-700: #036666;*/
+    /*--color-primary-600: #358F80;*/
+    /*--color-primary-500: #56AB91;*/
+    /*--color-primary-700: #245501;*/
+    /*--color-primary-600: #538d22;*/
+    /*--color-primary-500: #aad576;*/
 }
 
 @keyframes spin-slow {
@@ -102,6 +112,3 @@
 .animate-spin-slow {
     animation: spin-slow 1s ease-in-out infinite;
 }
-
-
-

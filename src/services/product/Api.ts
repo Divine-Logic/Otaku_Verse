@@ -3,6 +3,7 @@ import axios from "axios";
 
 import {
   ANIME_DETAIL_QUERY,
+  CHARACTER_DETAIL_QUERY,
   POPULAR_ANIME_QUERY,
   RECOMMENDATIONS_ANIME_QUERY,
   SEARCH_ANIME_QUERY,
@@ -107,4 +108,25 @@ export function useUpcomingEpisodes() {
     queryKey: ["upcomingEpisodes"],
     queryFn: fetchUpcomingEpisodes,
   });
+}
+
+export function useCharacterDetails(id: number) {
+  return useQuery({
+    queryKey: ["characterDetails", id],
+    queryFn: () => fetchCharacterDetails(id),
+    enabled: !!id,
+  });
+}
+
+async function fetchCharacterDetails(id: string | undefined) {
+  if (!id)
+    throw new Error("Character ID is required");
+  const characterId = typeof id === "string" ? Number.parseInt(id, 10) : id;
+  const response = await anilistApi.post("", {
+    query: CHARACTER_DETAIL_QUERY,
+    variables: { id: characterId },
+  });
+  if (response.data.errors)
+    throw new Error(response.data.errors[0].message);
+  return response.data.data.Character;
 }

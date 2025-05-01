@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
@@ -8,13 +8,26 @@ import Loader from "../../component/Loader.tsx";
 import SliderAnimation from "../../component/SliderAnimation.tsx";
 import { useTheme } from "../../hooks/useTheme.tsx";
 import { useAnimeDetails } from "../../services/product/Api.ts";
+import CharacterDetails from "./component/CharacterDetails.tsx";
 
 function AnimeDetails() {
   const { isDark } = useTheme();
+  const [videoError, setVideoError] = useState<boolean | null>(false);
   const { id } = useParams();
   const { data, isLoading, isError } = useAnimeDetails(id);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  // console.log("this is animedetails", data);
+  const [characterId, setCharacterId] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenCharacterModal = (characterId: number | null) => {
+    setCharacterId(characterId);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setCharacterId(null), 200);
+  };
 
   return (
     <Card className={`bg-transparent ${isDark ? "text-white" : "text-black"}  `}>
@@ -32,19 +45,23 @@ function AnimeDetails() {
               <div className="w-full mx-auto flex flex-col gap-[2rem]">
 
                 <div className="w-full overflow-hidden rounded-lg">
-                  {data?.trailer?.id
+                  {!videoError && data?.trailer?.id
                     ? (
                         <ReactPlayer
                           url={`https://www.youtube.com/embed/${data.trailer.id}`}
                           playing={false}
                           width="100%"
                           pip={false}
+                          controls={true}
+                          onError={() => {
+                            setVideoError(true);
+                          }}
                           className="rounded-lg overflow-hidden aspect-video"
                         />
                       )
                     : (
                         <img
-                          src={data?.bannerImage || data?.coverImage?.large}
+                          src={data?.bannerImage || data?.coverImage?.extraLarge || data?.coverImage?.large}
                           alt="Banner"
                           className="w-full h-48 md:h-[25rem] lg:h-[28rem] object-cover rounded-lg"
                         />
@@ -65,14 +82,16 @@ function AnimeDetails() {
                     </h1>
 
                     <div className="flex  items-start flex-col gap-2 sm:gap-4">
-                      <p className="flex items-center gap-1 text-gray-400 text-sm sm:text-base md:text-lg font-bold">
+                      <p className="flex items-center gap-1 text-primary-500 text-sm sm:text-base md:text-lg font-bold">
                         {`Release Year: ${data?.seasonYear || "N/A"}`}
                       </p>
-                      <p className="flex items-center gap-1 text-primary-500 text-sm sm:text-base md:text-lg">
-                        <AiFillStar className="text-yellow-400" />
-                        {`${data?.averageScore || "N/A"}/100`}
+                      <p className="flex items-center gap-1 font-bold text-yellow-400 text-sm  sm:text-lg tracking-wide">
+                        <AiFillStar />
+                        {data?.averageScore
+                          ? `${(data.averageScore / 10).toFixed(1)}/10`
+                          : "N/A"}
                       </p>
-                      <p className="text-sm sm:text-base md:text-lg text-gray-400">
+                      <p className="text-sm sm:text-base md:text-lg text-white">
                         {`Episodes: ${data?.episodes || "N/A"}`}
                       </p>
                     </div>
@@ -96,7 +115,8 @@ function AnimeDetails() {
                           {data?.characters?.edges?.map((item: any) => (
                             <div
                               key={item?.node?.id}
-                              className="flex flex-col items-center bg-primary-500 rounded-xl overflow-hidden transition-transform duration-300 w-28 sm:w-32 md:w-40 lg:w-48 h-auto"
+                              className="flex flex-col items-center bg-primary-500 rounded-xl overflow-hidden transition-transform duration-300 w-28 sm:w-32 md:w-40 lg:w-48 h-auto cursor-pointer"
+                              onClick={() => handleOpenCharacterModal(item?.node?.id)}
                             >
                               <div
                                 className="w-full h-36 sm:h-40 md:h-48 lg:h-56 overflow-hidden"
@@ -132,13 +152,21 @@ function AnimeDetails() {
                       ))}
                     </div>
 
-                    <p className="max-w-full mt-2 sm:mt-4 text-start font-Gothic text-sm sm:text-base md:text-lg">
+                    <p className="max-w-full mt-2 sm:mt-4 text-start font-semibold text-sm sm:text-base md:text-lg">
                       {data?.description?.replace(/<[^>]+>/g, "")}
                     </p>
                   </div>
                 </div>
               </div>
             )}
+
+      {characterId && (
+        <CharacterDetails
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          characterId={characterId}
+        />
+      )}
     </Card>
   );
 }

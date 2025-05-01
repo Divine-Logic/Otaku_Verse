@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import React, { createContext, use, useState } from "react";
 
-import type { ThemeContextType } from "../lib/types/types.ts";
+import type { ThemeContextType } from "../lib/types/Types.ts";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 

@@ -1,10 +1,8 @@
 import classNames from "classnames";
 import { FaMoon } from "react-icons/fa";
-import { FiUser } from "react-icons/fi";
 import { PiSunFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
-import icon from "../assets/logo/icon.png";
 import { useTheme } from "../hooks/useTheme.tsx";
 import SearchBar from "./SearchBar.tsx";
 
@@ -14,16 +12,16 @@ function Header() {
 
   return (
     <div
-      className={`sticky w-full top-0 z-50 flex flex-row justify-between items-center  shadow-none px-4  py-3 md:py-2 rounded-none ${isDark ? "bg-black" : "bg-white"}`}
+      className={`sticky w-full top-0 z-50 flex flex-row justify-between items-center  shadow-none px-4  py-3 md:py-2 rounded-none ${isDark ? "bg-primary-700" : "bg-white"}`}
 
     >
 
       <div className="flex items-center cursor-pointer  gap-2 " onClick={() => navigate("/")}>
-        <img
-          src={icon}
-          alt="Otaku Verse Logo"
-          className="h-10 w-10 md:h-14 md:w-14 object-contain"
-        />
+        {/* <img */}
+        {/*  src={icon} */}
+        {/*  alt="Otaku Verse Logo" */}
+        {/*  className="h-10 w-10 md:h-14 md:w-14 object-contain" */}
+        {/* /> */}
         <p className={classNames(
           "text-primary-500 text-xl md:text-4xl font-Gothic",
           "flex items-center justify-center text-shadow-md",
@@ -50,11 +48,11 @@ function Header() {
               )}
         </button>
 
-        <div className="flex items-center justify-center rounded-full bg-primary-500 p-2 md:p-3">
-          <FiUser
-            className="w-5 h-5 md:w-6 md:h-6 text-white"
-          />
-        </div>
+        {/* <div className="flex items-center justify-center rounded-full bg-primary-500 p-2 md:p-3"> */}
+        {/*  <FiUser */}
+        {/*    className="w-5 h-5 md:w-6 md:h-6 text-white" */}
+        {/*  /> */}
+        {/* </div> */}
       </div>
 
     </div>

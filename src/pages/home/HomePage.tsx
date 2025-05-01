@@ -1,6 +1,6 @@
 import Card from "../../component/Card.tsx";
 import Loader from "../../component/Loader.tsx";
-import { usePopularAnime, useRecommendAnime, useTrendingAnime, useUpcomingEpisodes } from "../../services/product/Api.ts";
+import { usePopularAnime, useRecommendAnime, useTrendingAnime } from "../../services/product/Api.ts";
 import PopularAnime from "./component/PopularAnime.tsx";
 import RecommendingAnime from "./component/RecommendingAnime.tsx";
 import TrendingAnime from "./component/TrendingAnime.tsx";
@@ -10,20 +10,17 @@ function HomePage() {
   const { data: trendingData, isLoading: isTrendingLoading } = useTrendingAnime();
   const { data: popularData, isLoading: isPopularLoading } = usePopularAnime();
   const { data: recommendData, isLoading: isRecommendLoading } = useRecommendAnime();
-  const { data: upcommingEpi, isLoading: isUpcomingEpiLoading } = useUpcomingEpisodes();
 
-  if (isTrendingLoading || isPopularLoading || isRecommendLoading || isUpcomingEpiLoading) {
+  if (isTrendingLoading || isPopularLoading || isRecommendLoading) {
     return <Loader />;
   }
-  console.log("this is upcomingEpi", upcommingEpi);
 
   return (
     <Card className=" bg-transparent flex flex-col gap-[1rem] md:gap-[2rem] max-w-screen">
 
       <PopularAnime data={popularData} />
-
+      <UpcomingEpisodes text="Upcoming Episodes" />
       <RecommendingAnime data={recommendData} text="Recommending Anime" />
-      <UpcomingEpisodes data={upcommingEpi} text="Upcoming Episodes" />
 
       <TrendingAnime data={trendingData} text="Trending Anime" />
 
