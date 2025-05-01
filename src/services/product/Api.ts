@@ -71,6 +71,19 @@ async function fetchUpcomingEpisodes() {
   }));
 }
 
+async function fetchCharacterDetails(id: string | number | undefined) {
+  if (!id)
+    throw new Error("Character ID is required");
+  const characterId = typeof id === "string" ? Number.parseInt(id, 10) : id;
+  const response = await anilistApi.post("", {
+    query: CHARACTER_DETAIL_QUERY,
+    variables: { id: characterId },
+  });
+  if (response.data.errors)
+    throw new Error(response.data.errors[0].message);
+  return response.data.data.Character;
+}
+
 export function useTrendingAnime() {
   return useQuery({ queryKey: ["trendingAnime"], queryFn: fetchTrendingAnime });
 }
@@ -116,17 +129,4 @@ export function useCharacterDetails(id: number) {
     queryFn: () => fetchCharacterDetails(id),
     enabled: !!id,
   });
-}
-
-async function fetchCharacterDetails(id: string | undefined) {
-  if (!id)
-    throw new Error("Character ID is required");
-  const characterId = typeof id === "string" ? Number.parseInt(id, 10) : id;
-  const response = await anilistApi.post("", {
-    query: CHARACTER_DETAIL_QUERY,
-    variables: { id: characterId },
-  });
-  if (response.data.errors)
-    throw new Error(response.data.errors[0].message);
-  return response.data.data.Character;
 }

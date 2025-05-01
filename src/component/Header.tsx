@@ -3,6 +3,7 @@ import { FaMoon } from "react-icons/fa";
 import { PiSunFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
+import icon from "../assets/logo/icon.png";
 import { useTheme } from "../hooks/useTheme.tsx";
 import SearchBar from "./SearchBar.tsx";
 
@@ -17,11 +18,11 @@ function Header() {
     >
 
       <div className="flex items-center cursor-pointer  gap-2 " onClick={() => navigate("/")}>
-        {/* <img */}
-        {/*  src={icon} */}
-        {/*  alt="Otaku Verse Logo" */}
-        {/*  className="h-10 w-10 md:h-14 md:w-14 object-contain" */}
-        {/* /> */}
+        <img
+          src={icon}
+          alt="Otaku Verse Logo"
+          className="h-10 w-10 md:h-14 md:w-14 object-contain"
+        />
         <p className={classNames(
           "text-primary-500 text-xl md:text-4xl font-Gothic",
           "flex items-center justify-center text-shadow-md",

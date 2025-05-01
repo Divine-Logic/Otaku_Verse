@@ -10,7 +10,7 @@ function PopularAnime({ data }: { data: any }) {
   const [direction, setDirection] = useState(1);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const navigate = useNavigate();
-  const pauseTimeout = useRef<NodeJS.Timeout | null>(null);
+  const pauseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const slide = (dir: number) => {
     setDirection(dir);
