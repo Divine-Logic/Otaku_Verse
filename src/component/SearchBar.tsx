@@ -49,9 +49,6 @@ function SearchBar() {
       setScoreRange(SCORE_RANGES[0]);
       setShowFilters(false);
     }
-    else {
-      document.body.style.overflow = "hidden";
-    }
   };
 
   const toggleGenre = (genre: string) => {
