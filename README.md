@@ -1,4 +1,4 @@
-Demo:https://theotakuverse.netlify.app/home
+Demo:-  https://theotakuverse.netlify.app/home
 
 
 Otakuverse is a modern web app that allows users to search and explore detailed information about their favorite anime
