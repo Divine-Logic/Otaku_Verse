@@ -93,7 +93,7 @@ function SearchBar() {
     <Card className="bg-transparent no-scrollbar w-full">
       <button
         onClick={openModal}
-        className="flex items-center justify-center p-3 bg-primary-500/90 backdrop-blur-sm rounded-full hover:bg-primary-500 transition-all duration-300 shadow-lg hover:shadow-primary-500/25"
+        className="flex items-center justify-center p-3 bg-primary-500/90 backdrop-blur-sm rounded-full hover:bg-primary-500  hover:shadow-primary-500/25 hover:cursor-pointer"
       >
         <FaSearch className="h-5 w-5 text-white" />
       </button>
