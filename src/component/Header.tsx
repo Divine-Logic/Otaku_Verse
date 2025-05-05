@@ -3,7 +3,7 @@ import { FaMoon } from "react-icons/fa";
 import { PiSunFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
-import icon from "../assets/logo/icon.png";
+import icon from "../assets/logo/icon2.png";
 import { useTheme } from "../hooks/useTheme.tsx";
 import SearchBar from "./SearchBar.tsx";
 
@@ -13,7 +13,7 @@ function Header() {
 
   return (
     <div
-      className={`sticky w-full top-0 z-50 flex flex-row justify-between items-center  shadow-none px-4  py-3 md:py-2 rounded-none ${isDark ? "bg-primary-700" : "bg-white"}`}
+      className={`sticky w-full top-0 z-50 flex flex-row justify-between items-center  ${isDark ? "bg-primary-700" : "bg-white"}`}
 
     >
 

@@ -84,13 +84,13 @@
     --color-white: #ffffff;
 
     /*Theme red*/
-    --color-primary-600: #971a20;
-    --color-primary-500: #e31a24;
-    --color-primary-700: #4D1520;
+    /*--color-primary-700: #4D1520;*/
+    /*--color-primary-600: #971a20;*/
+    /*--color-primary-500: #e31a24;*/
     /*theme green*/
-    /*--color-primary-700: #001e25;*/
-    /*--color-primary-600: #115039;*/
-    /*--color-primary-500: #38bb8c;*/
+    --color-primary-700: #001e25;
+    --color-primary-600: #115039;
+    --color-primary-500: #38bb8c;
     /*theme light green*/
     /*--color-primary-700: #036666;*/
     /*--color-primary-600: #358F80;*/

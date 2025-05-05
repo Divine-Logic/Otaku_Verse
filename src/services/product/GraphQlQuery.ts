@@ -64,8 +64,6 @@ export const POPULAR_ANIME_QUERY = `
 export const ANIME_DETAIL_QUERY = `
  query ($id: Int, $page: Int) {
   Media(id: $id) {
-
-    seasonYear
     id
     title {
       romaji
@@ -76,27 +74,19 @@ export const ANIME_DETAIL_QUERY = `
       extraLarge
       large
     }
-    rankings {
-      year  
-    }
+    bannerImage
     description(asHtml: false)
+    seasonYear
     episodes
     genres
     averageScore
-    bannerImage
+    status
+    format
     trailer {
       id
       site
-      thumbnail
     }
     characters(page: $page, sort: [ROLE, RELEVANCE]) {
-      pageInfo {
-        total
-        currentPage
-        lastPage
-        hasNextPage
-        perPage
-      }
       edges {
         node {
           id
@@ -107,6 +97,32 @@ export const ANIME_DETAIL_QUERY = `
             large
           }
         }
+        role
+        voiceActors(language: JAPANESE) {
+          id
+          name {
+            full
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
+    staff(page: $page, sort: [RELEVANCE]) {
+      edges {
+        node {
+          id
+          name {
+            full
+            native
+          }
+          image {
+            large
+          }
+          description
+        }
+        role
       }
     }
   }

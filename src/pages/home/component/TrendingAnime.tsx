@@ -21,7 +21,7 @@ function TrendingAnime({ data, text }: TrendingAnimeProps) {
       />
       <div ref={scrollContainerRef} className="overflow-x-auto no-scrollbar w-full">
         <div className="flex gap-5 items-center pr-10">
-          {data.map(anime => (
+          {data?.map(anime => (
             <div
               key={anime.id}
               className="w-64 cursor-pointer"

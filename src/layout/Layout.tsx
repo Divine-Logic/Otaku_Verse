@@ -8,12 +8,12 @@ import SplashScreen from "../pages/splashscreen/SplashScreen.tsx";
 
 function Layout() {
   const { isDark } = useTheme();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 3);
+    }, 3000);
   }, []);
 
   return isLoading
@@ -26,7 +26,7 @@ function Layout() {
 
           <Header />
 
-          <div className="grow ">
+          <div className="grow p-[0.8rem] sm:p-[0.5rem]">
             <Outlet />
           </div>
         </div>

@@ -49,14 +49,12 @@ function SearchBar() {
       setScoreRange(SCORE_RANGES[0]);
       setShowFilters(false);
     }
-    else {
-      document.body.style.overflow = "hidden";
-    }
   };
 
-  const toggleGenre = (genre: string) => {
+  const toggleGenre = (genre: string | { label: string }) => {
+    const genreValue = typeof genre === "string" ? genre : genre.label;
     setSelectedGenres(prev =>
-      prev.includes(genre) ? prev.filter(g => g !== genre) : [...prev, genre],
+      prev.includes(genreValue) ? prev.filter(g => g !== genreValue) : [...prev, genreValue],
     );
   };
 
@@ -66,8 +64,9 @@ function SearchBar() {
     navigate(`/anime/${id}`);
   };
 
-  const handleScoreRangeSelect = (selectedOption: { label: string }) => {
-    const newScoreRange = SCORE_RANGES.find(range => range.label === selectedOption.label);
+  const handleScoreRangeSelect = (selectedOption: string | { label: string }) => {
+    const label = typeof selectedOption === "string" ? selectedOption : selectedOption.label;
+    const newScoreRange = SCORE_RANGES.find(range => range.label === label);
     if (newScoreRange) {
       setScoreRange(newScoreRange);
     }

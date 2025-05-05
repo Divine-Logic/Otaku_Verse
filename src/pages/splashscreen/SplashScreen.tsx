@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-import splashscreenlogo1 from "../../assets/logo/icon.png";
-import splashscreenlogo2 from "../../assets/logo/namered.png";
+import splashscreenlogo1 from "../../assets/logo/icon2.png";
+import splashscreenlogo2 from "../../assets/logo/namegreen.png";
 import splashscreenlogo3 from "../../assets/logo/slogan.png";
 
 function SplashScreen() {
@@ -11,7 +11,7 @@ function SplashScreen() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 1500); // Splash screen shows for 3 seconds
+    }, 3500);
 
     return () => clearTimeout(timer);
   }, []);
