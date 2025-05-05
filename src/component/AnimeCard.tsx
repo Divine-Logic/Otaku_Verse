@@ -1,45 +1,53 @@
-import type { AnimeCardtype } from "../lib/types/Types.ts";
+import { FaStar } from "react-icons/fa";
 
-import Card from "./Card.tsx";
+import type { AnimeCardtype } from "../lib/types/Types.ts";
 
 function AnimeCard({ img, episodes, score, title1, title2 }: AnimeCardtype) {
   return (
-    <Card
-      className="w-[15rem] h-[21.125rem] relative group"
+    <div
+      className="w-[15rem] h-[21.125rem] relative group overflow-hidden rounded-2xl bg-zinc-900 shadow-xl transition-all duration-500 hover:scale-[0.97]"
 
     >
-      <img
-        src={img}
-        alt="Not Found"
-        className="rounded-xl w-[15rem] h-[21.125rem] "
-      />
-      <div
-
-        className="flex lg:hidden group-hover:flex flex-col absolute w-full bottom-0 text-white rounded-xl bg-gradient-to-t   from-primary-500/100 via-primary-500/70  to-primary-500/20 h-[5rem] items-center justify-center  "
-      >
-        {title1 || title2
-          ? (
-              <h2 className="text-lg font-bold truncate max-w-[10rem] text-center mx-auto">{title1 || title2}</h2>)
-          : ""}
-        {episodes
-          ? (
-              <p>
-                {`   Episodes :${episodes}`}
-              </p>
-            )
-          : ""}
-
-        {score
-          ? (
-              <p>
-                {` Score:  ${score}`}
-              </p>
-            )
-          : " "}
-
+      <div className="absolute inset-0">
+        <img
+          src={img}
+          alt={title1 || title2 || "Anime cover"}
+          className="w-full h-full object-cover "
+        />
       </div>
-    </Card>
 
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-80" />
+
+      <div
+        className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-6 transition-transform duration-500 group-hover:translate-y-0 translate-y-3"
+      >
+        <h2 className="text-white text-lg font-semibold truncate mb-2 drop-shadow-md">
+          {title1 || title2}
+        </h2>
+        <div className="flex justify-between items-center text-white text-sm">
+          {episodes && (
+            <p className="bg-primary-500/90 px-3 py-1 rounded-full font-medium shadow-md backdrop-blur">
+              {` ${episodes} EP`}
+            </p>
+          )}
+          {score && (
+            <span
+              className=" flex items-center text-yellow-400 gap-1"
+            >
+              <FaStar />
+              {score / 10}
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%)",
+        }}
+      />
+    </div>
   );
 }
 

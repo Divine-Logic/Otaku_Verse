@@ -1,4 +1,4 @@
-import type React from "react";
+import type { ReactNode } from "react";
 
 export type cardtype = {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ export type cardtype = {
 export type AnimeCardtype = {
   img?: string;
   episodes?: string[];
-  score?: string;
+  score?: number;
   title1?: string;
   title2?: string;
 };
@@ -93,8 +93,21 @@ export type DynamicCharacterCardProps = {
     titleEnglish: string;
     titleRomaji: string;
     coverImage: string;
-    voiceActorImage?: string | undefined;
+    voiceActorImage?: string | null;
     voiceActorName?: string | undefined;
   };
   onClick: (id: number | string) => void;
+};
+
+export type IconActionButtonProps = {
+  isActive?: boolean;
+  onClick?: () => void;
+  activeClassName?: string;
+  inactiveClassName: string;
+  icon: ReactNode;
+};
+export type CharacterCardArgs = {
+  data: any;
+  isDark: boolean;
+  handleOpenCharacterModal: (id: number) => void;
 };
