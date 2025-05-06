@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
-import SliderAnimation from "../../../component/atoms/SliderAnimation.tsx";
-import { useUpcomingEpisodes } from "../../../services/product/Api.ts";
+import SliderAnimation from "../../../../component/atoms/SliderAnimation.tsx";
+import { useUpcomingEpisodes } from "../../../../services/product/AnimeApi.ts";
 
 function UpcomingEpisodes({ text }: { text: string | null }) {
   const scrollContainerRef: React.RefObject<HTMLDivElement | null> = useRef(null);

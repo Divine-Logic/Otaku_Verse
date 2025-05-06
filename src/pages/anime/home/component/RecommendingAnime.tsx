@@ -3,8 +3,8 @@ import type { RefObject } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import AnimeCard from "../../../component/atoms/AnimeCard.tsx";
-import SliderAnimation from "../../../component/atoms/SliderAnimation.tsx";
+import AnimeCard from "../../../../component/atoms/AnimeCard.tsx";
+import SliderAnimation from "../../../../component/atoms/SliderAnimation.tsx";
 
 function RecommendingAnime({ data, text }: { data: any; text: string }) {
   const scrollContainerRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);

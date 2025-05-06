@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import type { TrendingAnimeProps } from "../../../lib/types/Types.ts";
+import type { TrendingAnimeProps } from "../../../../lib/types/Types.ts";
 
-import AnimeCard from "../../../component/atoms/AnimeCard.tsx";
-import Card from "../../../component/atoms/Card.tsx";
-import SliderAnimation from "../../../component/atoms/SliderAnimation.tsx";
+import AnimeCard from "../../../../component/atoms/AnimeCard.tsx";
+import Card from "../../../../component/atoms/Card.tsx";
+import SliderAnimation from "../../../../component/atoms/SliderAnimation.tsx";
 
 function TrendingAnime({ data, text }: TrendingAnimeProps) {
   const scrollContainerRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);

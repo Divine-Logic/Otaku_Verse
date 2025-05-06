@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
-import type { CharacterDetailsProps } from "../../../lib/types/Types";
+import type { CharacterDetailsProps } from "../../../../lib/types/Types.ts";
 
-import Loader from "../../../component/atoms/Loader.tsx";
-import { useCharacterDetails } from "../../../services/product/Api";
-import CharacterCard from "./OtherAnimeOfCharacter";
+import Loader from "../../../../component/atoms/Loader.tsx";
+import { useCharacterDetails } from "../../../../services/product/AnimeApi.ts";
+import CharacterCard from "./OtherAnimeOfCharacter.tsx";
 
 function CharacterDetails({ isOpen, onClose, characterId }: CharacterDetailsProps) {
   const { data, isLoading, isError } = useCharacterDetails(characterId);
   const [isMore, setIsMore] = useState(false);
   const navigate = useNavigate();
-
+  console.log("this is character details", data);
   useEffect(() => {
     if (!isOpen)
       return;

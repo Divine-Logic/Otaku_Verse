@@ -4,12 +4,12 @@ import { FaBookmark, FaCalendarAlt, FaCog, FaFilm, FaHeart, FaPlay, FaShare, FaS
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 
-import BannerIcon from "../../component/atoms/BannerIcon.tsx";
-import Card from "../../component/atoms/Card.tsx";
-import Loader from "../../component/atoms/Loader.tsx";
-import { useTheme } from "../../hooks/useTheme.tsx";
-import { useAnimeDetails } from "../../services/product/Api.ts";
-import { classNames } from "../../utils/classNames.ts";
+import BannerIcon from "../../../component/atoms/BannerIcon.tsx";
+import Card from "../../../component/atoms/Card.tsx";
+import Loader from "../../../component/atoms/Loader.tsx";
+import { useTheme } from "../../../hooks/useTheme.tsx";
+import { useAnimeDetails } from "../../../services/product/AnimeApi.ts";
+import { classNames } from "../../../utils/classNames.ts";
 import CharacterCard from "./component/CharacterCard.tsx";
 import CharacterDetails from "./component/CharacterDetails.tsx";
 import OverviewCard from "./component/OverviewCard.tsx";
