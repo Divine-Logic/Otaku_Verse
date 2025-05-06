@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 
+import { anilistApi } from "./Client.ts";
 import {
   ANIME_DETAIL_QUERY,
   CHARACTER_DETAIL_QUERY,
@@ -9,15 +9,7 @@ import {
   SEARCH_ANIME_QUERY,
   TRENDING_ANIME_QUERY,
   UPCOMING_EPISODES_QUERY,
-} from "./GraphQlQuery.ts";
-
-const anilistApi = axios.create({
-  baseURL: "https://graphql.anilist.co",
-  headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-  },
-});
+} from "./query/AnimeQuery.ts";
 
 async function fetchTrendingAnime() {
   const response = await anilistApi.post("", {

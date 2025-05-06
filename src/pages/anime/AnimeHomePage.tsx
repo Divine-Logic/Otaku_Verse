@@ -1,12 +1,12 @@
-import Card from "../../component/Card.tsx";
-import Loader from "../../component/Loader.tsx";
+import Card from "../../component/atoms/Card.tsx";
+import Loader from "../../component/atoms/Loader.tsx";
 import { usePopularAnime, useRecommendAnime, useTrendingAnime } from "../../services/product/Api.ts";
 import PopularAnime from "./component/PopularAnime.tsx";
 import RecommendingAnime from "./component/RecommendingAnime.tsx";
 import TrendingAnime from "./component/TrendingAnime.tsx";
 import UpcomingEpisodes from "./component/UpcomingEpisodes.tsx";
 
-function HomePage() {
+function AnimeHomePage() {
   const { data: trendingData, isLoading: isTrendingLoading } = useTrendingAnime();
   const { data: popularData, isLoading: isPopularLoading } = usePopularAnime();
   const { data: recommendData, isLoading: isRecommendLoading } = useRecommendAnime();
@@ -28,4 +28,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default AnimeHomePage;

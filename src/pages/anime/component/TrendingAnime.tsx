@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import type { TrendingAnimeProps } from "../../../lib/types/Types.ts";
 
-import AnimeCard from "../../../component/AnimeCard";
-import Card from "../../../component/Card";
-import SliderAnimation from "../../../component/SliderAnimation";
+import AnimeCard from "../../../component/atoms/AnimeCard.tsx";
+import Card from "../../../component/atoms/Card.tsx";
+import SliderAnimation from "../../../component/atoms/SliderAnimation.tsx";
 
 function TrendingAnime({ data, text }: TrendingAnimeProps) {
   const scrollContainerRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);

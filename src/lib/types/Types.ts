@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type React from "react";
 
 export type cardtype = {
   children: React.ReactNode;
@@ -17,6 +17,12 @@ export type ThemeContextType = {
   isDark: boolean;
   toggleTheme: () => void;
   setIsDark: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type ChangeTypeContext = {
+  isAnime: boolean;
+  toggleTheme: () => void;
+  setIsAnime: React.Dispatch<React.SetStateAction<boolean>>;
 };
 export type AnimeData = {
   id?: number;
@@ -104,10 +110,16 @@ export type IconActionButtonProps = {
   onClick?: () => void;
   activeClassName?: string;
   inactiveClassName: string;
-  icon: ReactNode;
+  icon: React.ReactNode;
 };
 export type CharacterCardArgs = {
   data: any;
   isDark: boolean;
   handleOpenCharacterModal: (id: number) => void;
+};
+
+export type SwitchToggleButton = {
+  option1: string;
+  option2: string;
+  onChange: { (value: string): void } | { (value: React.SetStateAction<string>): void } | any;
 };

@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { motion } from "framer-motion";
 
-import type { IconActionButtonProps } from "../lib/types/Types.ts";
+import type { IconActionButtonProps } from "../../lib/types/Types.ts";
 
 function BannerIcon({
   isActive = false,
@@ -16,7 +16,7 @@ function BannerIcon({
       whileTap={{ scale: 0.9 }}
       onClick={onClick}
       className={classNames(
-        "p-3 rounded-full backdrop-blur-sm transition-colors",
+        "p-3 rounded-full backdrop-blur-sm transition-colors hover:cursor-pointer",
         isActive ? activeClassName : inactiveClassName,
       )}
     >

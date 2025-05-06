@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-import SliderAnimation from "../../../component/SliderAnimation.tsx";
+import SliderAnimation from "../../../component/atoms/SliderAnimation.tsx";
 import { useUpcomingEpisodes } from "../../../services/product/Api.ts";
 
 function UpcomingEpisodes({ text }: { text: string | null }) {

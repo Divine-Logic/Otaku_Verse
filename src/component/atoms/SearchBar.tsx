@@ -3,11 +3,11 @@ import { FaFilter, FaSearch } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
-import { useSearchAnime } from "../services/product/Api";
-import Card from "./Card";
+import { useSearchAnime } from "../../services/product/Api.ts";
+import Card from "./Card.tsx";
 import Filter from "./Filter.tsx";
 import Loader from "./Loader.tsx";
-import SearchAnimeCard from "./SearchAnimeCard";
+import SearchAnimeCard from "./SearchAnimeCard.tsx";
 
 const GENRE_OPTIONS = [
   "Action",
@@ -93,7 +93,7 @@ function SearchBar() {
     <Card className="bg-transparent no-scrollbar w-full">
       <button
         onClick={openModal}
-        className="flex items-center justify-center p-3 bg-primary-500/90 backdrop-blur-sm rounded-full hover:bg-primary-500  hover:shadow-primary-500/25 hover:cursor-pointer"
+        className="flex items-center justify-center p-3 bg-primary-600/50 backdrop-blur-sm rounded-full hover:bg-primary-600/100  hover:shadow-primary-500/25 hover:cursor-pointer"
       >
         <FaSearch className="h-5 w-5 text-white" />
       </button>

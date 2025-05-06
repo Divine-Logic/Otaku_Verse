@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
-import Header from "../component/Header.tsx";
+import Header from "../component/molecules/Header.tsx";
 import { useTheme } from "../hooks/useTheme.tsx";
 import SplashScreen from "../pages/splashscreen/SplashScreen.tsx";
 
@@ -13,7 +13,7 @@ function Layout() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 3700);
   }, []);
 
   return isLoading

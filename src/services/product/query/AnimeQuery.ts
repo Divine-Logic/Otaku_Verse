@@ -173,9 +173,6 @@ export const UPCOMING_EPISODES_QUERY = `
           coverImage {
             large
           }
-          genres
-          averageScore
-          siteUrl
         }
       }
     }

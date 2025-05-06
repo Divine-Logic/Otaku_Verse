@@ -4,10 +4,11 @@ import { FaMoon } from "react-icons/fa";
 import { PiSunFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
-import icon from "../assets/logo/icon2.png";
-import { useTheme } from "../hooks/useTheme.tsx";
-import SearchBar from "./SearchBar.tsx";
-import SwitchToggle from "./SwitchToggle.tsx";
+import icon from "../../assets/logo/icon2.png";
+import { useTheme } from "../../hooks/useTheme.tsx";
+import ModeSwitcher from "../atoms/ModeSwitcher.tsx";
+import SearchBar from "../atoms/SearchBar.tsx";
+import SwitchToggle from "../atoms/SwitchToggle.tsx";
 
 function Header() {
   const { isDark, setIsDark } = useTheme();
@@ -19,9 +20,11 @@ function Header() {
 
     if (lower !== "anime") {
       setContentType("anime");
+      navigate(`/manga`);
     }
     else {
       setContentType("manga");
+      navigate(`/anime`);
     }
     console.log(contentType);
   };
@@ -34,10 +37,10 @@ function Header() {
         <img
           src={icon}
           alt="Otaku Verse Logo"
-          className="h-10 w-10 md:h-14 md:w-14 object-contain"
+          className="h-10 w-10 hidden sm:block md:h-14 md:w-14 object-contain"
         />
         <p className={classNames(
-          "text-primary-500 text-xl md:text-4xl font-Gothic",
+          "text-primary-500 text-xl sm:text-4xl font-Gothic",
           "flex items-center justify-center text-shadow-md",
         )}
         >
@@ -46,22 +49,26 @@ function Header() {
       </div>
 
       <div className="flex items-center justify-center gap-3">
-        <SwitchToggle onChange={handleToggle} option1="Anime" option2="Manga" />
         <SearchBar />
+        <div className="  gap-3 hidden md:flex w-full">
 
-        <button
-          onClick={() => setIsDark(!isDark)}
-          className="flex items-center justify-center hover:cursor-pointer p-2 rounded-full hover:bg-gray-100 dark:hover:bg-primary-600 transition-colors duration-200"
+          <SwitchToggle onChange={handleToggle} option1="Anime" option2="Manga" />
+          <button
+            onClick={() => setIsDark(!isDark)}
+            className="flex items-center justify-center hover:cursor-pointer p-2 rounded-full hover:bg-gray-100 dark:hover:bg-primary-600 transition-colors duration-200"
 
-        >
-          {isDark
-            ? (
-                <FaMoon className="w-6 h-6 md:w-7 md:h-7 text-primary-500" />
-              )
-            : (
-                <PiSunFill className="w-6 h-6 md:w-7 md:h-7 text-primary-500" />
-              )}
-        </button>
+          >
+            {isDark
+              ? (
+                  <FaMoon className="w-6 h-6 md:w-7 md:h-7 text-primary-500" />
+                )
+              : (
+                  <PiSunFill className="w-6 h-6 md:w-7 md:h-7 text-primary-500" />
+                )}
+          </button>
+        </div>
+
+        <ModeSwitcher handleToggle={handleToggle} setIsDark={setIsDark} isDark={isDark} />
 
         {/* <div className="flex items-center justify-center rounded-full bg-primary-500 p-2 md:p-3"> */}
         {/*  <FiUser */}

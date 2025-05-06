@@ -29,7 +29,7 @@ function SplashScreen() {
           <motion.img
             src={splashscreenlogo1}
             alt="Splash Screen Logo"
-            className="max-w-[10rem]  md:max-w-[25rem] lg:max-w-[28rem] xl:max-w-[28rem] 2xl:max-w-[30rem]"
+            className="max-w-[10rem]  md:max-w-[25rem] lg:max-w-[20rem] xl:max-w-[20rem] 2xl:max-w-[20rem]"
             initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
             animate={{ opacity: 1, scale: 1, rotate: 360 }}
             exit={{ opacity: 0, scale: 1.2, rotate: 500 }}

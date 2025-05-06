@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-import type { cardtype } from "../lib/types/Types.ts";
+import type { cardtype } from "../../lib/types/Types.ts";
 
 function Card({ className, children }: cardtype) {
   return (

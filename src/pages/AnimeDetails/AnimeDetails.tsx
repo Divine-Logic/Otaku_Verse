@@ -4,9 +4,9 @@ import { FaBookmark, FaCalendarAlt, FaCog, FaFilm, FaHeart, FaPlay, FaShare, FaS
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 
-import BannerIcon from "../../component/BannerIcon.tsx";
-import Card from "../../component/Card.tsx";
-import Loader from "../../component/Loader.tsx";
+import BannerIcon from "../../component/atoms/BannerIcon.tsx";
+import Card from "../../component/atoms/Card.tsx";
+import Loader from "../../component/atoms/Loader.tsx";
 import { useTheme } from "../../hooks/useTheme.tsx";
 import { useAnimeDetails } from "../../services/product/Api.ts";
 import { classNames } from "../../utils/classNames.ts";
@@ -31,7 +31,7 @@ const TabButton = memo(({
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     className={classNames(
-      "px-4 py-2 text-sm font-medium transition-colors",
+      "px-4 py-2 text-sm font-medium transition-colors hover:cursor-pointer",
       activeTab === tab
         ? isDark
           ? "text-white border-b-2 border-white"
@@ -98,7 +98,6 @@ function AnimeDetails() {
         className="w-full mx-auto flex flex-col gap-[2rem]"
       >
 
-        {/* Hero Section with Selected Anime */}
         {data && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -286,13 +285,13 @@ function AnimeDetails() {
           </motion.div>
 
           <div className="flex-1">
-            {/* Tabs */}
+
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
               className={classNames(
-                "flex gap-4 border-b mb-6",
+                "flex gap-4 border-b mb-6 ",
                 isDark ? "border-white/20" : "border-primary-500/20",
               )}
             >
@@ -303,6 +302,7 @@ function AnimeDetails() {
                   activeTab={activeTab}
                   setActiveTab={setActiveTab}
                   isDark={isDark}
+
                 />
               ))}
             </motion.div>

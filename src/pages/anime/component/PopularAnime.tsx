@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-import Card from "../../../component/Card.tsx";
+import Card from "../../../component/atoms/Card.tsx";
 
 function PopularAnime({ data }: { data: any }) {
   const [index, setIndex] = useState(0);
@@ -115,7 +115,7 @@ function PopularAnime({ data }: { data: any }) {
             e.stopPropagation();
             handleManualSlide(-1);
           }}
-          className="bg-primary-500/40 hover:bg-primary-500/60 p-2 rounded-full text-white"
+          className="bg-primary-500/40 hover:bg-primary-500/60 p-2 rounded-full text-white hover:cursor-pointer"
         >
           <MdKeyboardArrowLeft size={20} />
         </button>
@@ -126,7 +126,7 @@ function PopularAnime({ data }: { data: any }) {
             e.stopPropagation();
             handleManualSlide(1);
           }}
-          className="bg-primary-500/40 hover:bg-primary-500/60 p-2 rounded-full text-white"
+          className="bg-primary-500/40 hover:bg-primary-500/60 p-2 rounded-full text-white hover:cursor-pointer"
         >
           <MdKeyboardArrowRight size={20} />
         </button>

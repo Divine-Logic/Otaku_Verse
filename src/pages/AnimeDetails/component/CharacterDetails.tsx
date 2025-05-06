@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import type { CharacterDetailsProps } from "../../../lib/types/Types";
 
-import Loader from "../../../component/Loader";
+import Loader from "../../../component/atoms/Loader.tsx";
 import { useCharacterDetails } from "../../../services/product/Api";
 import CharacterCard from "./OtherAnimeOfCharacter";
 
