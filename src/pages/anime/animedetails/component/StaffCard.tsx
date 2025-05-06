@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { memo } from "react";
 
-import { classNames } from "../../../utils/classNames.ts";
+import { classNames } from "../../../../utils/classNames.ts";
 
 export const StaffCard = memo(({
   staff,

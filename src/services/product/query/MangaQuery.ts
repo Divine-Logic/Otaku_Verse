@@ -1,4 +1,4 @@
-export const POPULAR_MANGA = `query {
+export const POPULAR_MANGA_QUERY = `query {
     
     Page(page: 1, perPage: 10) {
         media(type: MANGA, sort: POPULARITY_DESC) {

@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import Layout from "../layout/Layout.tsx";
-import AnimeHomePage from "../pages/anime/AnimeHomePage.tsx";
-import AnimeDetails from "../pages/AnimeDetails/AnimeDetails.tsx";
+import AnimeDetails from "../pages/anime/animedetails/AnimeDetails.tsx";
+import AnimeHomePage from "../pages/anime/home/AnimeHomePage.tsx";
 import NotFound from "../pages/Error/NotFound.tsx";
-import MangaHome from "../pages/manga/MangaHome.tsx";
+import MangaHome from "../pages/manga/home/MangaHome.tsx";
 import Profile from "../pages/profile/Profile.tsx";
 
 function Routers() {

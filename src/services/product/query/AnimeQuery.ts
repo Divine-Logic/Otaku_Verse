@@ -193,11 +193,7 @@ export const CHARACTER_DETAIL_QUERY = `
       description
       gender
       age
-      dateOfBirth {
-        year
-        month
-        day
-      }
+   
       siteUrl
       media(perPage: 50) {
         edges {
