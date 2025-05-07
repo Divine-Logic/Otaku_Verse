@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { motion } from "framer-motion";
 
-import type { CharacterCardArgs } from "../../../../lib/types/Types.ts";
+import type { CharacterCardArgs } from "../../../../lib/types/AnimeTypes.ts";
 
 export default function CharacterCard({ data, isDark, handleOpenCharacterModal }: CharacterCardArgs) {
   return (

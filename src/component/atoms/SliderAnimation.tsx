@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
-import type { SliderAnimationTypes } from "../../lib/types/Types.ts";
+import type { SliderAnimationTypes } from "../../lib/types/AnimeTypes.ts";
 
 function SliderAnimation({ text, scrollContainerRef, className }: SliderAnimationTypes) {
   const [isAtStart, setIsAtStart] = useState(true);

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { anilistApi } from "./Client.ts";
-import { POPULAR_MANGA_QUERY } from "./query/MangaQuery.ts";
+import { MANGA_DETAILS_QUERY, POPULAR_MANGA_QUERY } from "./query/MangaQuery.ts";
 
 async function fetchPopularManga() {
   const response = await anilistApi.post("", {
@@ -10,6 +10,22 @@ async function fetchPopularManga() {
   return response.data.data.Page.media;
 }
 
-export function usePopulerManga() {
-  return useQuery({ queryKey: ["trendingAnime"], queryFn: fetchPopularManga });
+async function fetchMangaDetails(id: string | undefined) {
+  const response = await anilistApi.post("", {
+    query: MANGA_DETAILS_QUERY,
+    variables: { id },
+  });
+  return response.data.data.Media;
+}
+
+export function usePopularManga() {
+  return useQuery({ queryKey: ["popularManga"], queryFn: fetchPopularManga });
+}
+
+export function useMangaDetails(id: string | undefined) {
+  return useQuery({
+    queryKey: ["mangaDetails", id],
+    queryFn: () => fetchMangaDetails(id),
+    enabled: !!id,
+  });
 }

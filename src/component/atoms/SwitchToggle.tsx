@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 
-import type { SwitchToggleButton } from "../../lib/types/Types.ts";
+import type { SwitchToggleButton } from "../../lib/types/AnimeTypes.ts";
 
 function classNames(...classes: (string | false | null | undefined)[]) {
   return classes.filter(Boolean).join(" ");

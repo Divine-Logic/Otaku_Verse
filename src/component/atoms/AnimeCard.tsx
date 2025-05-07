@@ -1,6 +1,6 @@
 import { FaStar } from "react-icons/fa";
 
-import type { AnimeCardtype } from "../../lib/types/Types.ts";
+import type { AnimeCardtype } from "../../lib/types/AnimeTypes.ts";
 
 function AnimeCard({ img, episodes, score, title1, title2 }: AnimeCardtype) {
   return (

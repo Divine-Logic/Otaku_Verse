@@ -5,6 +5,7 @@ import AnimeDetails from "../pages/anime/animedetails/AnimeDetails.tsx";
 import AnimeHomePage from "../pages/anime/home/AnimeHomePage.tsx";
 import NotFound from "../pages/Error/NotFound.tsx";
 import MangaHome from "../pages/manga/home/MangaHome.tsx";
+import Mangadetails from "../pages/manga/mangadetails/Mangadetails.tsx";
 import Profile from "../pages/profile/Profile.tsx";
 
 function Routers() {
@@ -12,12 +13,22 @@ function Routers() {
     <Routes>
       <Route path="/" element={<Navigate to="/anime" replace />} />
       <Route path="/" element={<Layout />}>
+
+        {/* ? Anime's Routes */}
+
         <Route path="/anime" element={<AnimeHomePage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/anime/:id" element={<AnimeDetails />} />
+
+        {/* ? Manga's Routes */}
+
         <Route path="/manga" element={<MangaHome />} />
+        <Route path="/manga/:id" element={<Mangadetails />} />
+
+        {/* ? Error's Routes */}
 
         <Route path="*" element={<NotFound />} />
+
       </Route>
 
     </Routes>

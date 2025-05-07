@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 
-import type { SearchAnimeCardProps } from "../../lib/types/Types.ts";
+import type { SearchAnimeCardProps } from "../../lib/types/AnimeTypes.ts";
 
 function SearchAnimeCard({ img, handleCardClick, title1, title2, rating, genration }: SearchAnimeCardProps) {
   const [showAllGenres, setShowAllGenres] = useState(false);

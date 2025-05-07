@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { createContext, use, useState } from "react";
 
-import type { ChangeTypeContext } from "../lib/types/Types";
+import type { ChangeTypeContext } from "../lib/types/AnimeTypes.ts";
 
 const MediaTypeContext = createContext<ChangeTypeContext | undefined>(undefined);
 

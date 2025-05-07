@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
-import type { CharacterDetailsProps } from "../../../../lib/types/Types.ts";
+import type { CharacterDetailsProps } from "../../../../lib/types/AnimeTypes.ts";
 
 import Loader from "../../../../component/atoms/Loader.tsx";
 import { useCharacterDetails } from "../../../../services/product/AnimeApi.ts";
