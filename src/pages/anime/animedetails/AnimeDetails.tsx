@@ -10,7 +10,7 @@ import Loader from "../../../component/atoms/Loader.tsx";
 import { useTheme } from "../../../hooks/useTheme.tsx";
 import { useAnimeDetails } from "../../../services/product/Apis/AnimeApi.ts";
 import { classNames } from "../../../utils/classNames.ts";
-import CharacterCard from "./component/CharacterCard.tsx";
+import AnimeCharacterCard from "./component/AnimeCharacterCard.tsx";
 import CharacterDetails from "./component/CharacterDetails.tsx";
 import OverviewCard from "./component/OverviewCard.tsx";
 import { StaffCard } from "./component/StaffCard.tsx";
@@ -317,7 +317,7 @@ function AnimeDetails() {
               {activeTab === "overview" && <OverviewCard data={data} isDark={isDark} />}
 
               {activeTab === "characters" && (
-                <CharacterCard
+                <AnimeCharacterCard
                   data={data}
                   isDark={isDark}
                   handleOpenCharacterModal={handleOpenCharacterModal}

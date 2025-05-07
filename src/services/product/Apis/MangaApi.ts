@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { anilistApi } from "../Client.ts";
-import { MANGA_DETAILS_QUERY, POPULAR_MANGA_QUERY } from "../query/mangaQuery/MangaQuery.ts";
+import { MANGA_DETAILS_QUERY } from "../query/mangaQuery/MangaDetails.ts";
+import { POPULAR_MANGA_QUERY } from "../query/mangaQuery/PopulerManga.ts";
 
 async function fetchPopularManga() {
   const response = await anilistApi.post("", {

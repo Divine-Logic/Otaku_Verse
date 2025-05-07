@@ -29,7 +29,7 @@ export default function PopularManga() {
           <Card className=" gap-4 w-full bg-transparent rounded-lg">
             <SliderAnimation
               scrollContainerRef={scrollContainerRef}
-              text="Trending Manga"
+              text="Populer Manga"
               className="w-full  text-xl md:text-4xl font-bold text-primary-500"
             />
             <div className="p-6 flex overflow-x-auto gap-8 no-scrollbar rounded-lg" ref={scrollContainerRef}>
@@ -39,7 +39,7 @@ export default function PopularManga() {
                   onClick={() => {
                     navigate(`/manga/${manga.id}`);
                   }}
-                  className="group w-64 min-w-[16rem] bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer overflow-hidden"
+                  className="group w-64 min-w-[16rem] bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] rounded-xl cursor-pointer overflow-hidden"
                 >
                   <div className="relative">
                     <img
