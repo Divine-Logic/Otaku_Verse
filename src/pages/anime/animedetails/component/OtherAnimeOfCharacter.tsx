@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { get } from "lodash";
 import { FaStar } from "react-icons/fa";
 
-import type { DynamicCharacterCardProps } from "../../../../lib/types/Types.ts";
+import type { DynamicCharacterCardProps } from "../../../../lib/types/AnimeTypes.ts";
 
 import { useTheme } from "../../../../hooks/useTheme.tsx";
 

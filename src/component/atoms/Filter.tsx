@@ -1,4 +1,4 @@
-import type { FilterOptionProps } from "../../lib/types/Types.ts";
+import type { FilterOptionProps } from "../../lib/types/AnimeTypes.ts";
 
 function Filter({ title, options, selected, onSelect, isCategory }: FilterOptionProps) {
   return (

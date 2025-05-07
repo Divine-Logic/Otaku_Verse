@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { motion } from "framer-motion";
 
-import type { IconActionButtonProps } from "../../lib/types/Types.ts";
+import type { IconActionButtonProps } from "../../lib/types/AnimeTypes.ts";
 
 function BannerIcon({
   isActive = false,
