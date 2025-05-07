@@ -1,15 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { anilistApi } from "./Client.ts";
-import {
-  ANIME_DETAIL_QUERY,
-  CHARACTER_DETAIL_QUERY,
-  POPULAR_ANIME_QUERY,
-  RECOMMENDATIONS_ANIME_QUERY,
-  SEARCH_ANIME_QUERY,
-  TRENDING_ANIME_QUERY,
-  UPCOMING_EPISODES_QUERY,
-} from "./query/AnimeQuery.ts";
+import { anilistApi } from "../Client.ts";
+import { ANIME_DETAIL_QUERY } from "../query/animeQuery/AnimeDetails.ts";
+import { CHARACTER_DETAIL_QUERY } from "../query/animeQuery/CharacterDetails.ts";
+import { POPULAR_ANIME_QUERY } from "../query/animeQuery/PopulerAnime.ts";
+import { RECOMMENDATIONS_ANIME_QUERY } from "../query/animeQuery/recommendAnime.ts";
+import { SEARCH_ANIME_QUERY } from "../query/animeQuery/SearchQuery.ts";
+import { TRENDING_ANIME_QUERY } from "../query/animeQuery/TrendinAnime.ts";
+import { UPCOMING_EPISODES_QUERY } from "../query/animeQuery/UpcomingEpisodes.ts";
 
 async function fetchTrendingAnime() {
   const response = await anilistApi.post("", {

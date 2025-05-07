@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 import SliderAnimation from "../../../../component/atoms/SliderAnimation.tsx";
-import { useUpcomingEpisodes } from "../../../../services/product/AnimeApi.ts";
+import { useUpcomingEpisodes } from "../../../../services/product/Apis/AnimeApi.ts";
 
 function UpcomingEpisodes({ text }: { text: string | null }) {
   const scrollContainerRef: React.RefObject<HTMLDivElement | null> = useRef(null);
@@ -11,7 +11,7 @@ function UpcomingEpisodes({ text }: { text: string | null }) {
     <div className="flex flex-col gap-[2rem]">
       <SliderAnimation
         scrollContainerRef={scrollContainerRef}
-        className="text-xl md:text-3xl font-bold text-primary-500 w-full justify-between"
+        className="text-xl  md:text-4xl font-bold text-primary-500"
         text={text}
       />
       <div

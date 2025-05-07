@@ -3,7 +3,7 @@ import { FaFilter, FaSearch } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
-import { useSearchAnime } from "../../services/product/AnimeApi.ts";
+import { useSearchAnime } from "../../services/product/Apis/AnimeApi.ts";
 import Card from "./Card.tsx";
 import Filter from "./Filter.tsx";
 import Loader from "./Loader.tsx";

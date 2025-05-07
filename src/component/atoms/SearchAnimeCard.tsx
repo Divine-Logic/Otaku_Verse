@@ -26,7 +26,7 @@ function SearchAnimeCard({ img, handleCardClick, title1, title2, rating, genrati
       >
         <img
           src={img}
-          alt={title1 || title2 || "Anime cover"}
+          alt={title1 || title2 || "animeQuery cover"}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
 
