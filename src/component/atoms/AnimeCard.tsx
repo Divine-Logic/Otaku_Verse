@@ -11,7 +11,7 @@ function AnimeCard({ img, episodes, score, title1, title2 }: AnimeCardtype) {
       <div className="absolute inset-0">
         <img
           src={img}
-          alt={title1 || title2 || "Anime cover"}
+          alt={title1 || title2 || "animeQuery cover"}
           className="w-full h-full object-cover "
         />
       </div>

@@ -14,13 +14,13 @@ function Routers() {
       <Route path="/" element={<Navigate to="/anime" replace />} />
       <Route path="/" element={<Layout />}>
 
-        {/* ? Anime's Routes */}
+        {/* ? animeQuery's Routes */}
 
         <Route path="/anime" element={<AnimeHomePage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/anime/:id" element={<AnimeDetails />} />
 
-        {/* ? Manga's Routes */}
+        {/* ? mangaQuery's Routes */}
 
         <Route path="/manga" element={<MangaHome />} />
         <Route path="/manga/:id" element={<Mangadetails />} />

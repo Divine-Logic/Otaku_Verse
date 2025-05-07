@@ -129,10 +129,7 @@ export const MANGA_DETAILS_QUERY = `query MangaDetails($id: Int) {
       }
     }
     stats {
-      scoreDistribution {
-        score
-        amount
-      }
+   
       statusDistribution {
         status
         amount

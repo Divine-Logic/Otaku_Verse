@@ -5,7 +5,7 @@ import { MdOutlineFavorite } from "react-icons/md";
 import { useParams } from "react-router-dom";
 
 import Loader from "../../../component/atoms/Loader.tsx";
-import { useMangaDetails } from "../../../services/product/MangaApi.ts";
+import { useMangaDetails } from "../../../services/product/Apis/MangaApi.ts";
 
 function MangaDetails() {
   const { id } = useParams();
@@ -48,7 +48,7 @@ function MangaDetails() {
                   <img
                     src={manga.coverImage.extraLarge}
                     alt={manga.title.romaji}
-                    className="rounded-lg shadow-lg w-48 md:w-full object-cover"
+                    className="rounded-lg shadow-lg  w-48 md:w-[20rem] object-cover"
                   />
                 </div>
                 <div className="w-full md:w-3/4">
@@ -84,29 +84,33 @@ function MangaDetails() {
                       <span>{manga.favourites}</span>
                     </div>
                   </div>
-                  <div className="flex justify-between gap-4">
-                    <div>
-                      <p className="text-primary-500">Status</p>
-                      <p className="font-medium">{manga.status}</p>
+                  <div className="flex  gap-[10rem]">
+                    <div className="flex flex-col gap-[2rem]">
+                      <div>
+                        <p className="text-primary-500">Status</p>
+                        <p className="font-medium">{manga.status}</p>
+                      </div>
+                      <div>
+                        <p className="text-primary-500">Format</p>
+                        <p className="font-medium">{manga.format}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-primary-500">Format</p>
-                      <p className="font-medium">{manga.format}</p>
-                    </div>
-                    <div>
-                      <p className="text-primary-500">Chapters</p>
-                      <p
-                        className="font-medium"
-                      >
-                        {manga.chapters ?? "N/A"}
-                      </p>
-                    </div>
-                    <div className="flex flex-col">
-                      <p className="text-primary-500"> Vol.</p>
-                      <p>
-                        {manga.volumes ?? "N/A"}
-                      </p>
+                    <div className="flex flex-col gap-[2rem]">
+                      <div>
+                        <p className="text-primary-500">Chapters</p>
+                        <p
+                          className="font-medium"
+                        >
+                          {manga.chapters ?? "N/A"}
+                        </p>
+                      </div>
+                      <div className="flex flex-col">
+                        <p className="text-primary-500"> Vol.</p>
+                        <p>
+                          {manga.volumes ?? "N/A"}
+                        </p>
 
+                      </div>
                     </div>
                   </div>
                 </div>
