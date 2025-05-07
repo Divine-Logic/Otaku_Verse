@@ -13,3 +13,20 @@ export type PopularMangaProps = {
   popularity: number;
   rankings?: { rank: number; type?: string }[] | undefined;
 };
+
+export type PopularityProps = {
+  node: {
+    id: number | undefined;
+    image: { large: string | undefined };
+    name: { full: string | undefined; native: string | undefined };
+  };
+  role: string | undefined;
+};
+export type MangaCharacterProps = {
+  key?: number;
+  id?: number;
+  bannerImage?: string;
+  nameNative?: string;
+  nameFull?: string;
+  role?: string;
+};

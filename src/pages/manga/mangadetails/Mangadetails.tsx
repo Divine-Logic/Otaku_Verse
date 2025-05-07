@@ -1,37 +1,42 @@
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { ImFire } from "react-icons/im";
+import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineFavorite } from "react-icons/md";
 import { useParams } from "react-router-dom";
 
+import type { PopularityProps } from "../../../lib/types/MangaTypes.ts";
+
 import Loader from "../../../component/atoms/Loader.tsx";
+import { useTheme } from "../../../hooks/useTheme.tsx";
 import { useMangaDetails } from "../../../services/product/Apis/MangaApi.ts";
+import MangaCharacterCard from "./components/MangaCharacterCard.tsx";
 
 function MangaDetails() {
   const { id } = useParams();
   const { data, isLoading, isError } = useMangaDetails(id);
   const [activeTab, setActiveTab] = useState("overview");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isDark } = useTheme();
 
   const manga: any = data;
-  console.log("this is manga details", manga);
 
   const handleTabChange = (tab: any) => {
     setActiveTab(tab);
-    setIsMobileMenuOpen(false);
+    setIsMenuOpen(false);
   };
 
   return isLoading
     ? <Loader />
     : isError
       ? (
-          <div className="min-h-screen flex items-center justify-center text-white text-xl">
+          <div className="flex items-center justify-center bg-red-500 text-white text-xl m-auto h-[75vh]">
             Manga Details
             Not Found
           </div>
         )
       : (
-          <div className="min-h-screen text-white pb-12 bg-transparent">
+          <div className="min-h-screen text-white  bg-transparent">
 
             {manga.bannerImage && (
               <div
@@ -116,39 +121,28 @@ function MangaDetails() {
                 </div>
               </div>
 
-              <div className="border-b border-zinc-700 mt-8">
+              <div className=" mt-8">
                 <div className="md:hidden">
                   <button
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="w-full flex items-center justify-between py-3 px-4 bg-zinc-800 rounded-md"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    className="w-full flex items-center justify-between py-3 px-4 bg-primary-600 "
                   >
                     <span
                       className="font-medium"
                     >
                       {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
                     </span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className={`h-5 w-5 transition-transform ${isMobileMenuOpen ? "rotate-180" : ""}`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
+                    <IoIosArrowDown />
                   </button>
-                  {isMobileMenuOpen && (
-                    <div className="absolute z-10 mt-1  bg-zinc-800 rounded-md shadow-lg">
+                  {isMenuOpen && (
+                    <div
+                      className="absolute z-10  bg-primary-600   mx-auto "
+                    >
                       {["overview", "characters", "staff", "related"].map(tab => (
                         <button
                           key={tab}
                           onClick={() => handleTabChange(tab)}
-                          className={`block w-full text-left px-4 py-3 ${activeTab === tab ? "bg-zinc-700 text-primary-500" : "text-zinc-300 "}`}
+                          className={`block w-full text-left px-3 pr-[13.2rem] py-3 ${activeTab === tab ? "bg-primary-500  font-bold" : "text-white "}`}
                         >
                           {tab.charAt(0).toUpperCase() + tab.slice(1)}
                         </button>
@@ -161,7 +155,7 @@ function MangaDetails() {
                     <button
                       key={tab}
                       onClick={() => handleTabChange(tab)}
-                      className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === tab ? "border-primary-500 text-primary-500" : "border-transparent text-zinc-400 hover:text-zinc-300 hover:border-zinc-500"}`}
+                      className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === tab ? "border-primary-500 text-primary-500" : "border-transparent text-zinc-400 hover:text-primary-600 hover:border-primary-600"}`}
                     >
                       {tab.charAt(0).toUpperCase() + tab.slice(1)}
                     </button>
@@ -171,14 +165,16 @@ function MangaDetails() {
 
               <div className="mt-6">
                 {activeTab === "overview" && (
-                  <div className="space-y-6">
-                    <h2 className="text-xl font-bold mb-4">Synopsis</h2>
+                  <div
+                    className={`flex flex-col gap-3  p-4 rounded-lg    ${isDark ? "bg-primary-600/50" : "bg-primary-700/20"}  `}
+                  >
+                    <h2 className="text-2xl font-semibold mb-6 text-primary-500">Description</h2>
                     <div
                       className="text-zinc-300 text-sm sm:text-base"
                     >
                       {manga.description?.replace(/<[^>]+>/g, "")}
                     </div>
-                    <h2 className="text-xl font-bold mb-4">External Links</h2>
+                    <h2 className="text-2xl font-semibold mb-6 text-primary-500">External Links</h2>
                     <div className="flex flex-wrap gap-2 sm:gap-3">
                       {manga.externalLinks.map((link: string | any) => (
                         <a
@@ -197,48 +193,27 @@ function MangaDetails() {
                 )}
                 {activeTab === "characters" && (
                   <div>
-                    <h2 className="text-xl font-bold mb-4">Main Characters</h2>
+                    <h2 className="text-2xl font-semibold mb-6 text-primary-500">Main Characters</h2>
                     <div
                       className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
                     >
-                      {manga.characters.edges.map(({ node }: { node: string | any }) => (
-                        <div key={node.id} className="group">
-                          <div className="relative overflow-hidden rounded-lg">
-                            <img
-                              src={node.image.large}
-                              alt={node.name.full}
-                              className="w-full h-40 object-cover transition-transform group-hover:scale-105"
-                            />
-                            <div
-                              className="absolute inset-0 bg-gradient-to-t from-primary-600 to-transparent opacity-0 group-hover:opacity-100 flex items-end"
-                            >
-                              <div className="p-2 w-full text-center">
+                      {manga.characters.edges.map((character: PopularityProps) => (
+                        <MangaCharacterCard
+                          key={character.node.id}
+                          id={character.node.id}
+                          bannerImage={character.node.image.large}
+                          role={character.role}
+                          nameFull={character.node.name.full}
+                          nameNative={character.node.name.native}
+                        />
 
-                                <span
-                                  className="text-xs px-2 py-1 bg-primary-500 rounded-full"
-                                >
-                                  {node.role}
-                                </span>
-
-                              </div>
-                            </div>
-                          </div>
-                          <p className="mt-2 text-xs sm:text-sm text-center truncate text-primary-500">
-                            <p>
-                              {node.name.full}
-                            </p>
-                            <p>
-                              {node.name.native}
-                            </p>
-                          </p>
-                        </div>
                       ))}
                     </div>
                   </div>
                 )}
                 {activeTab === "staff" && (
                   <div className="flex flex-col gap-6">
-                    <h2 className="text-2xl font-semibold text-white ">Staff & Creators</h2>
+                    <h2 className="text-2xl font-semibold mb-6 text-primary-500">Staff & Creators</h2>
                     <div className="flex flex-wrap gap-6 items-center justify-center">
                       {manga.staff.edges.map(({ node }: { node: any }) => (
                         <div
@@ -261,7 +236,7 @@ function MangaDetails() {
                 )}
                 {activeTab === "related" && (
                   <div className="mt-8">
-                    <h2 className="text-2xl font-semibold mb-6 text-gray-800">Related Manga</h2>
+                    <h2 className="text-2xl font-semibold mb-6 text-primary-500">Related Manga</h2>
                     <div
                       className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
                     >
