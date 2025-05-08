@@ -33,6 +33,7 @@ export type SliderAnimationTypes = {
 export type TrendingAnimeProps = {
   data?: undefined | any[];
   text?: string;
+  isLoading: boolean;
 };
 
 export type FilterOptionProps = {

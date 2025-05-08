@@ -1,5 +1,4 @@
 import Card from "../../../component/atoms/Card.tsx";
-import Loader from "../../../component/atoms/Loader.tsx";
 import { usePopularAnime } from "../../../services/product/apis/anime/PopulerAnime.ts";
 import { useRecommendAnime } from "../../../services/product/apis/anime/recommendAnime.ts";
 import { useTrendingAnime } from "../../../services/product/apis/anime/TrendinAnime.ts";
@@ -22,22 +21,22 @@ function AnimeHomePage() {
 
   const flattenedRecommendData = recommendData?.pages.flatMap(page => page.nodes) || [];
 
-  if (isTrendingLoading || isPopularLoading || isRecommendLoading) {
-    return <Loader />;
-  }
-
   return (
     <Card className="bg-transparent flex flex-col gap-[1rem] md:gap-[2rem] max-w-screen">
-      <PopularAnime data={popularData} />
+      <PopularAnime data={popularData} isLoading={isPopularLoading} />
+
       <UpcomingEpisodes text="Upcoming Episodes" />
+
       <RecommendingAnime
         data={flattenedRecommendData}
+        isLoading={isRecommendLoading}
         text="Recommending Anime"
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
       />
-      <TrendingAnime data={trendingData} text="Trending Anime" />
+
+      <TrendingAnime isLoading={isTrendingLoading} data={trendingData} text="Trending Anime" />
     </Card>
   );
 }

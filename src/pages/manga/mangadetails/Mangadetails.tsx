@@ -137,38 +137,41 @@ function MangaDetails() {
                     <h2 className="text-2xl font-semibold mb-6 text-primary-500">External Links</h2>
                     <div className="flex flex-wrap gap-2 sm:gap-3">
                       {manga.externalLinks.map((link: string | any) => (
-                        <a
-                          key={link.url}
-                          href={link.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="bg-primary-600/50 hover:bg-primary-600 px-3 py-2 sm:px-4 rounded-r-md text-xs sm:text-sm flex items-center"
-                          style={{ borderLeft: `4px solid ${link.color || "#38bb8c"}` }}
-                        >
-                          {link.site}
-                        </a>
+                        <div>
+
+                          <a
+                            key={link.url}
+                            href={link.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="bg-primary-600/50 hover:bg-primary-600 px-3 py-2 sm:px-4 rounded-r-md text-xs sm:text-sm flex items-center"
+                            style={{ borderLeft: `4px solid ${link.color || "#38bb8c"} rounded-md` }}
+                          >
+                            <img src={link.icon} alt="" />
+                            {link.site}
+                          </a>
+                        </div>
                       ))}
                     </div>
                   </div>
                 )}
                 {activeTab === "Cast" && (
-                  <div>
 
-                    <div
-                      className="flex flex-wrap gap-4"
-                    >
-                      {manga.characters.edges.map((character: PopularityProps) => (
-                        <MangaCharacterCard
-                          key={character.node.id}
-                          id={character.node.id}
-                          bannerImage={character.node.image.large}
-                          role={character.role}
-                          nameFull={character.node.name.full}
-                          nameNative={character.node.name.native}
-                        />
+                  <div
+                    className="flex flex-wrap gap-4"
+                  >
+                    {manga.characters.edges.map((character: PopularityProps) => (
+                      <MangaCharacterCard
+                        key={character.node.id}
+                        id={character.node.id}
+                        bannerImage={character.node.image.large}
+                        role={character.role}
+                        nameFull={character.node.name.full}
+                        nameNative={character.node.name.native}
+                      />
 
-                      ))}
-                    </div>
+                    ))}
+
                   </div>
                 )}
                 {activeTab === "staff" && (

@@ -5,7 +5,7 @@ import type { AnimeCardtype } from "../../lib/types/AnimeTypes.ts";
 function AnimeCard({ img, episodes, score, title1, title2 }: AnimeCardtype) {
   return (
     <div
-      className="w-[15rem] h-[21.125rem] relative group overflow-hidden rounded-2xl bg-zinc-900 shadow-xl transition-all duration-500 hover:scale-[0.97]"
+      className="w-[15rem] h-[21.125rem] relative group overflow-hidden rounded-2xl bg-zinc-900 transition-all duration-500 hover:scale-[0.97]"
 
     >
       <div className="absolute inset-0">
@@ -31,12 +31,12 @@ function AnimeCard({ img, episodes, score, title1, title2 }: AnimeCardtype) {
             </p>
           )}
           {score && (
-            <span
+            <div
               className=" flex items-center text-yellow-400 gap-1"
             >
               <FaStar />
               {score / 10}
-            </span>
+            </div>
           )}
         </div>
       </div>
