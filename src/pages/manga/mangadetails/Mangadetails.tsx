@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { ImFire } from "react-icons/im";
-import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineFavorite } from "react-icons/md";
 import { useParams } from "react-router-dom";
 
 import type { PopularityProps } from "../../../lib/types/MangaTypes.ts";
 
 import Loader from "../../../component/atoms/Loader.tsx";
+import RelatedDetailsCard from "../../../component/atoms/RelatedDetailsCard.tsx";
+import { StaffCard } from "../../../component/atoms/StaffCard.tsx";
+import TabButton from "../../../component/atoms/TabButton.tsx";
 import { useTheme } from "../../../hooks/useTheme.tsx";
 import { useMangaDetails } from "../../../services/product/apis/mangaApi/MangaDetails.ts";
 import MangaCharacterCard from "./components/MangaCharacterCard.tsx";
@@ -16,15 +18,13 @@ function MangaDetails() {
   const { id } = useParams();
   const { data, isLoading, isError } = useMangaDetails(id);
   const [activeTab, setActiveTab] = useState("overview");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const { isDark } = useTheme();
 
+  const tabLabels: string[] = ["overview", "Cast", "staff", "related"];
   const manga: any = data;
 
-  const handleTabChange = (tab: any) => {
-    setActiveTab(tab);
-    setIsMenuOpen(false);
-  };
+  console.log(`this is staff details`, manga);
 
   return isLoading
     ? <Loader />
@@ -121,48 +121,7 @@ function MangaDetails() {
                 </div>
               </div>
 
-              <div className=" mt-8">
-                <div className="md:hidden">
-                  <button
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="w-full flex items-center justify-between py-3 px-4 bg-primary-600 "
-                  >
-                    <span
-                      className="font-medium"
-                    >
-                      {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-                    </span>
-                    <IoIosArrowDown />
-                  </button>
-                  {isMenuOpen && (
-                    <div
-                      className="absolute z-10  bg-primary-600   mx-auto "
-                    >
-                      {["overview", "Cast", "staff", "related"].map(tab => (
-                        <button
-                          key={tab}
-                          onClick={() => handleTabChange(tab)}
-                          className={`block w-full text-left px-3 pr-[13.2rem] py-3 ${activeTab === tab ? "bg-primary-500  font-bold" : "text-white "}`}
-                        >
-                          {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <nav className="hidden md:flex gap-4 ">
-                  {["overview", "Cast", "staff", "related"].map(tab => (
-                    <button
-                      key={tab}
-                      onClick={() => handleTabChange(tab)}
-                      className={`py-2 px-1 border-b-2 font-medium text-lg ${activeTab === tab ? "border-primary-500 text-primary-500" : "border-transparent text-zinc-400 hover:text-primary-600 hover:border-primary-600"}`}
-                    >
-                      {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                    </button>
-                  ))}
-                  <hr />
-                </nav>
-              </div>
+              <TabButton tabs={tabLabels} activeTab={activeTab} setActiveTab={setActiveTab} isDark={isDark} />
 
               <div className="mt-6">
                 {activeTab === "overview" && (
@@ -213,27 +172,23 @@ function MangaDetails() {
                   </div>
                 )}
                 {activeTab === "staff" && (
-                  <div className="flex flex-col gap-6">
-                    <h2 className="text-2xl font-semibold mb-6 text-primary-500">Staff & Creators</h2>
-                    <div className="flex flex-wrap gap-6 items-center justify-center">
-                      {manga.staff.edges.map(({ node }: { node: any }) => (
-                        <div
-                          key={node.id}
-                          className="w-[25rem ] flex flex-col items-center bg-primary-600 p-2 rounded-lg shadow-md hover:shadow-xl transition duration-300"
-                        >
-                          <img
-                            src={node.image.large}
-                            alt="Not found"
-                            className=" h-[5rem] w-[7.5rem] sm:h-[10rem] sm:w-[15rem] rounded-lg object-center mb-2"
-                          />
-                          <p className="text-sm font-medium text-center text-white hover:text-primary-500">
-                            {node.name.full}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
 
+                  <div
+                    className="flex flex-wrap gap-4"
+                  >
+                    {manga?.staff?.edges?.map((item: any) => (
+                      <StaffCard
+                        key={item.node.id}
+                        img={item.node.image.large}
+                        role={item.role}
+                        nativeName={item.node.name.native}
+                        englishName={item.node.name.full}
+                        index={0}
+                        isDark={isDark}
+                      />
+                    ),
+                    )}
+                  </div>
                 )}
                 {activeTab === "related" && (
                   <div className="mt-8">
@@ -242,21 +197,14 @@ function MangaDetails() {
                       className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
                     >
                       {manga.relations.edges.map(({ node }: { node: any }) => (
-                        <div
+                        <RelatedDetailsCard
                           key={node.id}
-                          className="group cursor-pointer rounded-lg overflow-hidden  bg-primary-600 text-white text-center"
-                        >
-                          <img
-                            src={node.coverImage.medium}
-                            alt={node.title.romaji}
-                            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-
-                          <p className="text-lg my-auto ">
-                            {node.title.english || node.title.romaji}
-                          </p>
-
-                        </div>
+                          img={node.coverImage.medium}
+                          title1={node.title.english}
+                          title2={node.title.romaji}
+                          type={node.status}
+                          status={node.type}
+                        />
                       ))}
                     </div>
                   </div>

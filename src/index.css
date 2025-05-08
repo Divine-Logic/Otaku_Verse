@@ -1,17 +1,15 @@
 @import "tailwindcss";
 
-
 @layer base {
     @font-face {
-        font-family: 'Special Gothic Expanded One';
-        src: url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
+        font-family: "Special Gothic Expanded One";
+        src: url("https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap");
         font-weight: 400;
         font-style: normal;
     }
 }
 
 @layer utilities {
-
     .no-scrollbar::-webkit-scrollbar-track {
         display: none;
     }
@@ -21,7 +19,6 @@
         scrollbar-color: var(--color-primary-500) transparent;
         overflow-y: scroll;
     }
-
 
     .scrollbar1::-webkit-scrollbar-thumb {
         background-color: var(--color-primary-500);
@@ -42,9 +39,7 @@
     }
 }
 
-
 @theme {
-
     --font-Gothic: "Special Gothic Expanded One", sans-serif;
 
     --tracking-tighter: -0.05em;
@@ -53,7 +48,6 @@
     --tracking-wide: 0.025em;
     --tracking-wider: 0.05em;
     --tracking-widest: 0.1em;
-
 
     --leading-tight: 1.25;
     --leading-snug: 1.375;
@@ -70,7 +64,6 @@
     --radius-3xl: 1.5rem;
     --radius-4xl: 2rem;
 
-
     --blur-xs: 4px;
     --blur-sm: 8px;
     --blur-md: 12px;
@@ -78,7 +71,6 @@
     --blur-xl: 24px;
     --blur-2xl: 40px;
     --blur-3xl: 64px;
-
 
     /*--color-black: #000000;*/
     --color-white: #ffffff;
