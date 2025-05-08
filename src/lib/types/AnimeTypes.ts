@@ -24,24 +24,6 @@ export type ChangeTypeContext = {
   toggleTheme: () => void;
   setIsAnime: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export type AnimeData = {
-  id?: number;
-  title: {
-    romaji?: string;
-    english?: string;
-    native?: string;
-  };
-  coverImage: {
-    large?: string;
-  };
-  episodes?: number;
-  averageScore?: number;
-};
-
-export type Props = {
-  data: AnimeData;
-};
-
 export type SliderAnimationTypes = {
   text?: string | null;
   scrollContainerRef: React.RefObject<HTMLDivElement | null>;
@@ -76,22 +58,6 @@ export type CharacterDetailsProps = {
   onClose: () => void;
   characterId: number;
 };
-
-export type CharacterCardProps = {
-  anime: {
-    node?: {
-      id?: number | string;
-      coverImage?: { large?: string };
-      title?: string;
-    };
-    voiceActors?: {
-      image?: { large?: string };
-      name?: { full?: string };
-    }[];
-  };
-  onClick: (id?: number | string) => void;
-};
-
 export type DynamicCharacterCardProps = {
   data: any;
   keys: {
@@ -122,4 +88,13 @@ export type SwitchToggleButton = {
   option1: string;
   option2: string;
   onChange: { (value: string): void } | { (value: React.SetStateAction<string>): void } | any;
+};
+
+export type StaffCardProps = {
+  img: string;
+  nativeName: string;
+  englishName: string;
+  role: string;
+  index: number;
+  isDark: boolean;
 };

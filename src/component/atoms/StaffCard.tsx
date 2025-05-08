@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { memo } from "react";
 
+import type { StaffCardProps } from "../../lib/types/AnimeTypes.ts";
+
 import { classNames } from "../../utils/classNames.ts";
 
 export const StaffCard = memo(({
@@ -8,16 +10,8 @@ export const StaffCard = memo(({
   englishName,
   nativeName,
   role,
-
   isDark,
-}: {
-  img: string;
-  nativeName: string;
-  englishName: string;
-  role: string;
-  index: number;
-  isDark: boolean;
-}) => (
+}: StaffCardProps) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}

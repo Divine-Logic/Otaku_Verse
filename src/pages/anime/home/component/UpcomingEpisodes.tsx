@@ -27,7 +27,7 @@ function UpcomingEpisodes({ text }: { text: string | null }) {
             <img
               src={item.image}
               alt={item.title}
-              className="h-[10rem] object-cover rounded-r-lg rounded-l-lg"
+              className="h-[10rem] max-w-[7rem] object-cover rounded-r-lg rounded-l-lg"
             />
             <div className="flex items-start justify-center flex-col">
               <h2 className="text-xl font-bold text-start">{item.title}</h2>
