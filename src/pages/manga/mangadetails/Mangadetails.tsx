@@ -9,7 +9,7 @@ import type { PopularityProps } from "../../../lib/types/MangaTypes.ts";
 
 import Loader from "../../../component/atoms/Loader.tsx";
 import { useTheme } from "../../../hooks/useTheme.tsx";
-import { useMangaDetails } from "../../../services/product/Apis/MangaApi.ts";
+import { useMangaDetails } from "../../../services/product/apis/mangaApi/MangaDetails.ts";
 import MangaCharacterCard from "./components/MangaCharacterCard.tsx";
 
 function MangaDetails() {
@@ -138,7 +138,7 @@ function MangaDetails() {
                     <div
                       className="absolute z-10  bg-primary-600   mx-auto "
                     >
-                      {["overview", "characters", "staff", "related"].map(tab => (
+                      {["overview", "Cast", "staff", "related"].map(tab => (
                         <button
                           key={tab}
                           onClick={() => handleTabChange(tab)}
@@ -151,15 +151,16 @@ function MangaDetails() {
                   )}
                 </div>
                 <nav className="hidden md:flex gap-4 ">
-                  {["overview", "characters", "staff", "related"].map(tab => (
+                  {["overview", "Cast", "staff", "related"].map(tab => (
                     <button
                       key={tab}
                       onClick={() => handleTabChange(tab)}
-                      className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === tab ? "border-primary-500 text-primary-500" : "border-transparent text-zinc-400 hover:text-primary-600 hover:border-primary-600"}`}
+                      className={`py-2 px-1 border-b-2 font-medium text-lg ${activeTab === tab ? "border-primary-500 text-primary-500" : "border-transparent text-zinc-400 hover:text-primary-600 hover:border-primary-600"}`}
                     >
                       {tab.charAt(0).toUpperCase() + tab.slice(1)}
                     </button>
                   ))}
+                  <hr />
                 </nav>
               </div>
 
@@ -182,8 +183,8 @@ function MangaDetails() {
                           href={link.url}
                           target="_blank"
                           rel="noreferrer"
-                          className="bg-primary-600/50 hover:bg-primary-600 px-3 py-2 sm:px-4 rounded-md text-xs sm:text-sm flex items-center"
-                          style={{ borderLeft: `4px solid ${link.color || "#6366f1"}` }}
+                          className="bg-primary-600/50 hover:bg-primary-600 px-3 py-2 sm:px-4 rounded-r-md text-xs sm:text-sm flex items-center"
+                          style={{ borderLeft: `4px solid ${link.color || "#38bb8c"}` }}
                         >
                           {link.site}
                         </a>
@@ -191,11 +192,11 @@ function MangaDetails() {
                     </div>
                   </div>
                 )}
-                {activeTab === "characters" && (
+                {activeTab === "Cast" && (
                   <div>
-                    <h2 className="text-2xl font-semibold mb-6 text-primary-500">Main Characters</h2>
+
                     <div
-                      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
+                      className="flex flex-wrap gap-4"
                     >
                       {manga.characters.edges.map((character: PopularityProps) => (
                         <MangaCharacterCard

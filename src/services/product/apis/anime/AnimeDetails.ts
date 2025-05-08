@@ -1,3 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
+
+import { anilistApi } from "../../Client.ts";
+
 export const ANIME_DETAIL_QUERY = `
  query ($id: Int, $page: Int) {
   Media(id: $id) {
@@ -65,3 +69,19 @@ export const ANIME_DETAIL_QUERY = `
   }
 }
 `;
+
+async function fetchAnimeDetails(id: string | undefined) {
+  const response = await anilistApi.post("", {
+    query: ANIME_DETAIL_QUERY,
+    variables: { id },
+  });
+  return response.data.data.Media;
+}
+
+export function useAnimeDetails(id: string | undefined) {
+  return useQuery({
+    queryKey: ["animeDetails", id],
+    queryFn: () => fetchAnimeDetails(id),
+    enabled: !!id,
+  });
+}

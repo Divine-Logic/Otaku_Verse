@@ -8,7 +8,7 @@ import type { PopularMangaProps } from "../../../../lib/types/MangaTypes.ts";
 import Card from "../../../../component/atoms/Card.tsx";
 import Loader from "../../../../component/atoms/Loader.tsx";
 import SliderAnimation from "../../../../component/atoms/SliderAnimation.tsx";
-import { usePopularManga } from "../../../../services/product/Apis/MangaApi.ts";
+import { usePopularManga } from "../../../../services/product/apis/mangaApi/PopulerManga.ts";
 
 export default function PopularManga() {
   const { data, isLoading, isError } = usePopularManga();

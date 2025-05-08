@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import type { CharacterDetailsProps } from "../../../../lib/types/AnimeTypes.ts";
 
 import Loader from "../../../../component/atoms/Loader.tsx";
-import { useCharacterDetails } from "../../../../services/product/Apis/AnimeApi.ts";
+import { useCharacterDetails } from "../../../../services/product/apis/anime/CharacterDetails.ts";
 import CharacterCard from "./OtherAnimeOfCharacter.tsx";
 
 function CharacterDetails({ isOpen, onClose, characterId }: CharacterDetailsProps) {
