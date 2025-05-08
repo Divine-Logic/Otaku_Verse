@@ -1,4 +1,5 @@
-Demo:- https://theotakuverse.netlify.app/home
+
+Demo:-  https://theotakuverse.netlify.app
 
 Otakuverse is a modern web app that allows users to search and explore detailed information about their favorite anime
 using the powerful AniList GraphQL API. Built with React, TypeScript, and Apollo Client, the app delivers a smooth and
