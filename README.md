@@ -1,3 +1,4 @@
+
 Demo:-  https://theotakuverse.netlify.app
 
 Otakuverse is a modern web app that allows users to search and explore detailed information about their favorite anime
@@ -31,4 +32,3 @@ npm run dev
 
 📦 API Reference
 AniList GraphQL Docs: https://anilist.github.io/ApiV2-GraphQL-Docs/
-
