@@ -8,7 +8,7 @@ import BannerIcon from "../../../component/atoms/BannerIcon.tsx";
 import Card from "../../../component/atoms/Card.tsx";
 import Loader from "../../../component/atoms/Loader.tsx";
 import { useTheme } from "../../../hooks/useTheme.tsx";
-import { useAnimeDetails } from "../../../services/product/Apis/AnimeApi.ts";
+import { useAnimeDetails } from "../../../services/product/apis/anime/AnimeDetails.ts";
 import { classNames } from "../../../utils/classNames.ts";
 import AnimeCharacterCard from "./component/AnimeCharacterCard.tsx";
 import CharacterDetails from "./component/CharacterDetails.tsx";
