@@ -60,9 +60,12 @@ export const MANGA_DETAILS_QUERY = `query MangaDetails($id: Int) {
           type
           format
           status(version: 2)
-          coverImage {
-            medium
-          }
+         coverImage {
+          large
+          medium
+          extraLarge
+          color
+        }
         }
       }
     }

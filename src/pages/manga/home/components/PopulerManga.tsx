@@ -1,9 +1,9 @@
 import type { RefObject } from "react";
 
 import { useRef } from "react";
+import "react-loading-skeleton/dist/skeleton.css";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
-import "react-loading-skeleton/dist/skeleton.css";
 
 import type { PopularMangaProps } from "../../../../lib/types/MangaTypes.ts";
 
@@ -18,44 +18,74 @@ export default function PopularManga() {
 
   return isLoading
     ? (
-        <Card className="gap-4 w-full bg-transparent rounded-lg">
+        <Card className=" bg-transparent gap-4 overflow-x-auto overflow-y-hidden     no-scrollbar">
           <SliderAnimation
+            text="Popular Manga"
             scrollContainerRef={scrollContainerRef}
-            text="Populer Manga"
-            className="w-full text-xl md:text-4xl font-bold text-primary-500"
+            className="text-xl md:text-3xl font-bold text-primary-500 w-full justify-between   "
           />
           <div
-            className="p-6  flex overflow-x-auto gap-8 no-scrollbar rounded-lg"
             ref={scrollContainerRef}
+            className="overflow-x-auto overflow-y-hidden  no-scrollbar w-full flex rounded-lg bg-transparent "
           >
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-[25rem] bg-gradient-to-br from-primary-600 via-primary-500/80 to-primary-600/50 rounded-xl"
-              >
-                <div className="w-full h-[15rem]">
-                  <Skeleton
-                    height="100%"
-                    baseColor="#38bb8c"
-                    style={{
-                      borderRadius: "0.75rem 0.75rem 0 0",
+            <div className="flex gap-5 items-center pr-10 bg-transparent  ">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-[28rem] w-[16rem] bg-gradient-to-br from-white/20   via-white/15 to-white/10 rounded-xl flex flex-col justify-between"
+                >
+                  <div className="w-full h-[15rem]">
+                    <Skeleton
+                      height="100%"
+                      baseColor="#848884"
+                      highlightColor="#A9A9A9"
+                      style={{
+                        borderRadius: "0.75rem 0.75rem 0 0",
 
-                    }}
-                  />
-                </div>
-                <div className="p-4 space-y-3">
-                  <Skeleton height={20} width="70%" baseColor="#38bb8c" />
-                  <Skeleton count={2} baseColor="#38bb8c" />
-                  <div className="flex justify-between items-center pt-3 border-t border-gray-700">
-                    <div className={`flex flex-row gap-2 text-primary-500 `}>
-                      <Skeleton width={60} height={20} baseColor="#38bb8c" />
-                      <Skeleton width={60} height={20} baseColor="#38bb8c" />
-                    </div>
-                    <Skeleton width={60} height={20} baseColor="#38bb8c" />
+                      }}
+
+                    />
                   </div>
+
+                  <Skeleton
+                    height={20}
+                    width={100}
+                    baseColor="#848884"
+                    highlightColor="#A9A9A9"
+                  />
+                  <Skeleton
+                    width={190}
+                    height={15}
+                    count={3}
+                    baseColor="#848884"
+                    highlightColor="#A9A9A9"
+                  />
+                  <div className="flex justify-between p-5">
+                    <div className={`flex flex-row gap-2 text-primary-500 `}>
+                      <Skeleton
+                        width={40}
+                        height={20}
+                        baseColor="#848884"
+                        highlightColor="#A9A9A9"
+                      />
+                      <Skeleton
+                        width={40}
+                        height={20}
+                        baseColor="#848884"
+                        highlightColor="#A9A9A9"
+                      />
+                    </div>
+                    <Skeleton
+                      width={50}
+                      height={20}
+                      baseColor="#848884"
+                      highlightColor="#A9A9A9"
+                    />
+                  </div>
+
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </Card>
       )

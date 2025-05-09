@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { ImFire } from "react-icons/im";
 import { MdOutlineFavorite } from "react-icons/md";
@@ -12,25 +12,40 @@ import { StaffCard } from "../../../component/atoms/StaffCard.tsx";
 import TabButton from "../../../component/atoms/TabButton.tsx";
 import { useTheme } from "../../../hooks/useTheme.tsx";
 import { useMangaDetails } from "../../../services/product/apis/mangaApi/MangaDetails.ts";
-import MangaCharacterCard from "./components/MangaCharacterCard.tsx";
+import AnimeCharacterCard from "../../anime/animedetails/component/AnimeCharacterCard.tsx";
+import CharacterDetails from "../../anime/animedetails/component/CharacterDetails.tsx";
 
 function MangaDetails() {
   const { id } = useParams();
   const { data, isLoading, isError } = useMangaDetails(id);
   const [activeTab, setActiveTab] = useState("overview");
 
+  const [characterId, setCharacterId] = useState<number | null>(null);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { isDark } = useTheme();
 
   const tabLabels: string[] = ["overview", "Cast", "staff", "related"];
   const manga: any = data;
+  const handleOpenCharacterModal = useCallback((id: number | null) => {
+    setCharacterId(id);
+    setIsModalOpen(true);
+  }, []);
 
+  const handleModalClose = useCallback(() => {
+    setIsModalOpen(false);
+    setTimeout(() => setCharacterId(null), 200);
+  }, []);
   console.log(`this is staff details`, manga);
 
   return isLoading
     ? <Loader />
     : isError
       ? (
-          <div className="flex items-center justify-center bg-red-500 text-white text-xl m-auto h-[75vh]">
+          <div
+            className="flex items-center justify-center bg-transparent text-primary-500 text-xl m-auto h-[75vh]"
+          >
             Manga Details
             Not Found
           </div>
@@ -136,9 +151,8 @@ function MangaDetails() {
                     </div>
                     <h2 className="text-2xl font-semibold mb-6 text-primary-500">External Links</h2>
                     <div className="flex flex-wrap gap-2 sm:gap-3">
-                      {manga.externalLinks.map((link: string | any) => (
-                        <div>
-
+                      {manga.externalLinks.map((link: string | any, index: number) => (
+                        <div key={index}>
                           <a
                             key={link.url}
                             href={link.url}
@@ -147,7 +161,15 @@ function MangaDetails() {
                             className="bg-primary-600/50 hover:bg-primary-600 px-3 py-2 sm:px-4 rounded-r-md text-xs sm:text-sm flex items-center"
                             style={{ borderLeft: `4px solid ${link.color || "#38bb8c"} rounded-md` }}
                           >
-                            <img src={link.icon} alt="" />
+                            {(`${link.icon}`)
+                              ? (
+                                  <img
+                                    src={link.icon}
+                                    alt=""
+                                    className="h-[2rem] w-[2rem] rounded-lg "
+                                  />
+                                )
+                              : ""}
                             {link.site}
                           </a>
                         </div>
@@ -161,13 +183,15 @@ function MangaDetails() {
                     className="flex flex-wrap gap-4"
                   >
                     {manga.characters.edges.map((character: PopularityProps) => (
-                      <MangaCharacterCard
+                      <AnimeCharacterCard
                         key={character.node.id}
                         id={character.node.id}
-                        bannerImage={character.node.image.large}
+                        coverImage1={character.node.image.large}
                         role={character.role}
-                        nameFull={character.node.name.full}
-                        nameNative={character.node.name.native}
+                        englishName={character.node.name.full}
+                        nativeName={character.node.name.native}
+                        isDark={false}
+                        handleOpenCharacterModal={handleOpenCharacterModal}
                       />
 
                     ))}
@@ -197,16 +221,18 @@ function MangaDetails() {
                   <div className="mt-8">
                     <h2 className="text-2xl font-semibold mb-6 text-primary-500">Related Manga</h2>
                     <div
-                      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
+                      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
                     >
                       {manga.relations.edges.map(({ node }: { node: any }) => (
                         <RelatedDetailsCard
                           key={node.id}
-                          img={node.coverImage.medium}
+                          id={node.id}
+                          img={node.coverImage.large}
                           title1={node.title.english}
                           title2={node.title.romaji}
                           type={node.status}
                           status={node.type}
+
                         />
                       ))}
                     </div>
@@ -214,6 +240,13 @@ function MangaDetails() {
 
                 )}
               </div>
+              {characterId && (
+                <CharacterDetails
+                  isOpen={isModalOpen}
+                  onClose={handleModalClose}
+                  characterId={characterId}
+                />
+              )}
             </div>
           </div>
         );

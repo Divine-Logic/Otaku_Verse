@@ -26,13 +26,13 @@ function UpcomingEpisodes({ text }: { text: string }) {
               {Array.from({ length: 7 }).map((_, index?: number) => (
                 <div
                   key={index}
-                  className="flex gap-[1rem] min-w-[22rem] h-full md:min-w-[25rem] cursor-pointer bg-gradient-to-l from-white/50 via-white/40 to-white/25 rounded-lg p-2"
+                  className="flex gap-[1rem] min-w-[22rem] h-full md:min-w-[25rem] cursor-pointer bg-gradient-to-r from-white/20 via-white/15 to-white/10 rounded-lg p-2"
                 >
-                  <Skeleton height="10rem" width="7rem" borderRadius=".5rem" />
+                  <Skeleton height="10rem" width="7rem" borderRadius=".5rem" baseColor="#848884" />
                   <div className="flex items-start justify-center flex-col">
-                    <Skeleton height={50} width={170} baseColor="#A9A9A9" />
-                    <Skeleton height={10} width={50} baseColor="#A9A9A9" />
-                    <Skeleton height={20} width={100} baseColor="#A9A9A9" />
+                    <Skeleton height={50} width={170} baseColor="#848884" />
+                    <Skeleton height={10} width={50} baseColor="#848884" />
+                    <Skeleton height={20} width={100} baseColor="#848884" />
                   </div>
                 </div>
               ))}

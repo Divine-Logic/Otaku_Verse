@@ -54,27 +54,33 @@ function PopularAnime({ data, isLoading }: { data: any; isLoading?: boolean }) {
   return isLoading
     ? (
         <Card className="w-full h-[65vh] relative overflow-hidden rounded-xl bg-transparent">
-          <div className="absolute w-full h-full">
+          <div className="absolute w-full h-full ">
 
-            <div className="absolute  w-full h-full">
-              <Skeleton height="100%" width="100%" borderRadius="0.75rem" baseColor="#A9A9A9" />
+            <div className="absolute  w-full h-full ">
+              <Skeleton
+                height="100%"
+                width="100%"
+                borderRadius="0.75rem"
+                baseColor="#71797E"
+                highlightColor="#848884"
+              />
             </div>
 
             <div
-              className="absolute flex flex-col items-start px-6 sm:px-12  gap-[1rem] sm:mt-[18rem] mt-[18rem] w-full "
+              className="absolute flex flex-col items-start px-6 sm:px-12  gap-[1rem] sm:mt-[18rem] mt-[18rem] w-full  "
             >
 
               <div className="hidden sm:flex  flex-col text-start gap-4">
-                <Skeleton height={30} width={250} baseColor="#D9D9D9" />
-                <Skeleton height={80} width={400} count={1} baseColor="#D9D9D9" />
+                <Skeleton height={30} width={250} baseColor="#848884" highlightColor="#A9A9A9" />
+                <Skeleton height={80} width={400} count={1} baseColor="#848884" highlightColor="#A9A9A9" />
               </div>
               <div className="sm:hidden flex flex-col text-start gap-3">
-                <Skeleton height={30} width={200} count={1} baseColor="#D9D9D9" />
-                <Skeleton height={50} width={280} count={1} baseColor="#D9D9D9" />
+                <Skeleton height={30} width={200} count={1} baseColor="#848884  " highlightColor="#A9A9A9" />
+                <Skeleton height={50} width={280} count={1} baseColor="#848884 " highlightColor="#A9A9A9" />
               </div>
 
               <div>
-                <Skeleton height={35} width={120} baseColor="#D9D9D9" />
+                <Skeleton height={35} width={120} baseColor="#848884" />
               </div>
             </div>
           </div>

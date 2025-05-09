@@ -240,13 +240,28 @@ function AnimeDetails() {
                     >
                       {activeTab === "overview" && <OverviewCard data={data} isDark={isDark} />}
                       {activeTab === "Cast" && (
-                        <AnimeCharacterCard
-                          data={data}
-                          isDark={isDark}
-                          handleOpenCharacterModal={handleOpenCharacterModal}
-                        />
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.1 }}
+                          className="flex flex-wrap gap-6"
+                        >
+                          {data?.characters?.edges?.map((item: any, index: number) => (
+                            <AnimeCharacterCard
+                              key={index}
+                              englishName={item?.node?.name?.full}
+                              isDark={isDark}
+                              handleOpenCharacterModal={handleOpenCharacterModal}
+                              id={item?.node?.id}
+                              coverImage1={item?.node?.image?.large}
+                              nativeName={item?.node?.name?.native}
+                            />
+                          ))}
+                        </motion.div>
                       )}
+
                       {activeTab === "staff" && (
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}

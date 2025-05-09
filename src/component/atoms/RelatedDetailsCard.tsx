@@ -1,46 +1,51 @@
+import { useNavigate } from "react-router-dom";
+
+import type { RelatedCardProps } from "../../lib/types/MangaTypes.ts";
+
 function RelatedDetailsCard({
   key,
+  id,
   img,
   title1,
   title2,
   status,
   type,
-}: {
-  key: string;
-  img: string;
-  title1: string;
-  title2: string;
-  type: string;
-  status: string;
-}) {
+}: RelatedCardProps) {
+  const navigate = useNavigate();
   return (
     <div
       key={key}
-      className="group relative cursor-pointer rounded-2xl overflow-hidden shadow-lg bg-primary-600 text-white transition duration-300 hover:shadow-2xl"
+      className="group relative cursor-pointer rounded-3xl overflow-hidden bg-[#1a1a2e]  transition-transform duration-500 hover:scale-105"
+      onClick={() => {
+        navigate(`/manga/${id}`);
+      }}
     >
-      <img
-        src={img}
-        alt="not found"
-        className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110"
-      />
+      <div className="relative">
+        <img
+          src={img}
+          alt="not found"
+          className="w-full h-64 object-fill rounded-t-3xl group-hover:brightness-110 transition duration-500"
+        />
 
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"
-      />
-
-      <div className="absolute bottom-4 left-4 right-4 text-left">
-        <p className="text-xl font-semibold drop-shadow-md">
-          {title1 || title2}
-        </p>
-        <p>
-          {status}
-        </p>
-        <p className="text-sm font-semibold drop-shadow-md">
+        <div
+          className="absolute top-3 left-3 z-10 bg-primary-700/50 backdrop-blur-md px-3 py-1 rounded-xl border border-white/20 text-[10px] uppercase tracking-widest text-white font-bold shadow-md"
+        >
           {type}
-        </p>
+        </div>
 
       </div>
+
+      <div
+        className="px-5 py-4 bg-black/60 backdrop-blur-md rounded-b-3xl text-white space-y-1 transition duration-300 group-hover:bg-black/70"
+      >
+        <h2 className="text-2xl font-extrabold leading-tight text-primary-500 drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)] tracking-wide">
+          {title1 || title2}
+        </h2>
+        <p className="text-sm text-white/70  tracking-wide">{status}</p>
+      </div>
+
     </div>
+
   );
 }
 
