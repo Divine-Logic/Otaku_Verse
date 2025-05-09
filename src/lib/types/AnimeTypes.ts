@@ -80,7 +80,11 @@ export type IconActionButtonProps = {
   icon: React.ReactNode;
 };
 export type CharacterCardArgs = {
-  data: any;
+  id?: number;
+  role?: string;
+  coverImage1?: string;
+  englishName?: string;
+  nativeName?: string;
   isDark: boolean;
   handleOpenCharacterModal: (id: number) => void;
 };

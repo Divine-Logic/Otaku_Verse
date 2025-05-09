@@ -3,55 +3,68 @@ import { motion } from "framer-motion";
 
 import type { CharacterCardArgs } from "../../../../lib/types/AnimeTypes.ts";
 
-export default function AnimeCharacterCard({ data, isDark, handleOpenCharacterModal }: CharacterCardArgs) {
+export default function AnimeCharacterCard({
+  id,
+  role,
+  coverImage1,
+  englishName,
+  nativeName,
+  isDark,
+  handleOpenCharacterModal,
+}: CharacterCardArgs) {
   return (
 
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.1 }}
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      key={id}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.1 }}
+      whileHover={{ scale: 1.02, y: -5 }}
+      className={classNames(
+        "flex flex-col backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 cursor-pointer shadow-lg  h-[170px] w-[150px]   sm:h-[316px]  sm:w-[280px]    ",
+        isDark
+          ? "bg-white/10 hover:shadow-white/50"
+          : "bg-primary-500/10 hover:shadow-primary-500/50",
+      )}
+      onClick={() => handleOpenCharacterModal(id)}
     >
-      {data?.characters?.edges?.map((item: any, index: number) => (
-        <motion.div
-          key={item?.node?.id || index}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+      <div className="relative h-64 overflow-hidden">
+        <div className={classNames(
+          "absolute inset-0 z-10 bg-gradient-to-t from-black/50 to-transparent",
+        )}
+        />
+        <motion.img
+          whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.1 }}
-          whileHover={{ scale: 1.02, y: -5 }}
-          className={classNames(
-            "flex flex-col backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 cursor-pointer shadow-lg",
-            isDark
-              ? "bg-white/10 hover:shadow-white/50"
-              : "bg-primary-500/10 hover:shadow-primary-500/50",
-          )}
-          onClick={() => handleOpenCharacterModal(item?.node?.id)}
-        >
-          <div className="relative h-64 overflow-hidden">
-            <div className={classNames(
-              "absolute inset-0 z-10 bg-gradient-to-t from-black/50 to-transparent",
-            )}
-            />
-            <motion.img
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.1 }}
-              src={item?.node?.image?.large}
-              alt={item?.node?.name?.full}
-              className="w-full h-full object-cover transition-transform duration-500 absolute"
-            />
+          src={coverImage1}
+          alt="Not Found"
+          className="w-full h-full object-cover transition-transform duration-500 absolute"
+        />
 
-          </div>
+      </div>
 
-          <h3 className={classNames(
-            "text-lg font-semibold truncate p-4  ",
-            isDark ? "text-white" : "text-primary-700",
-          )}
-          >
-            {item?.node?.name?.full || "Unknown"}
-          </h3>
+      <div className={classNames(
+        "text-xl mx-auto font-semibold truncate p-4  text-primary-500 flex flex-col items-center justify-center",
+      )}
+      >
+        {role && (
+          <p>
+            {role}
+          </p>
+        )}
+        {englishName && (
+          <p>
+            {englishName}
+          </p>
+        )}
+        {nativeName && (
+          <p>
 
-        </motion.div>
-      ))}
+            {nativeName || "Unknown"}
+          </p>
+        )}
+      </div>
+
     </motion.div>
 
   );

@@ -30,3 +30,25 @@ export type MangaCharacterProps = {
   nameFull?: string;
   role?: string;
 };
+
+export type MangaCardProps = {
+  id?: number | null;
+  coverImage1?: string;
+  coverImage2?: string;
+  status?: string;
+  rank?: number;
+  title1?: string | null;
+  title2?: string | null;
+  description?: string;
+  chapters?: number;
+  volumes?: number;
+};
+export type RelatedCardProps = {
+  key: string;
+  id: number | null;
+  img: string;
+  title1: string;
+  title2: string;
+  type: string;
+  status: string;
+};
