@@ -24,8 +24,8 @@ function StatusChart({ statusData }: StatusDataProps) {
     if (!statusData || statusData.length === 0)
       return;
 
-    const labels = statusData.map(item => item.status || "");
-    const data = statusData.map(item => item.amount || 0);
+    const labels = Array.isArray(statusData) ? statusData.map(item => item.status || "") : [];
+    const data = Array.isArray(statusData) ? statusData.map(item => item.amount || 0) : [];
 
     setChartData({
       labels,
@@ -46,7 +46,7 @@ function StatusChart({ statusData }: StatusDataProps) {
         labels: {
           color: "#fff",
           font: {
-            size: 10,
+            size: 12,
           },
           padding: 10,
         },
