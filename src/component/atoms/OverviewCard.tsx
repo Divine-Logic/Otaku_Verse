@@ -4,7 +4,6 @@ import StatusChart from "./StatusChart.tsx";
 
 export default function OverviewCard({ description, externalLinks, statusDistribution, isDark }: OverviewCardProps) {
   const parsedStatus = JSON.parse(statusDistribution);
-  <StatusChart statusData={parsedStatus} />;
 
   console.log("OverviewCard", statusDistribution);
   return (
