@@ -17,13 +17,11 @@ function SimpleCreativeSlider({ text, scrollContainerRef, className = "" }: Slid
       setIsAtStart(scrollLeft <= 5);
       setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - 6);
       setProgress((scrollLeft / (scrollWidth - clientWidth)) * 100 || 0);
-      // console.log(progress);
 
       if (scrollTimerRef.current)
         clearTimeout(scrollTimerRef.current);
       setIsScrolling(true);
       scrollTimerRef.current = setTimeout(() => setIsScrolling(false), 500);
-      // console.log(isScrolling);
     }
   };
 

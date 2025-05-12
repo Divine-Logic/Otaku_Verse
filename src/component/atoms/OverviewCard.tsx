@@ -3,6 +3,10 @@ import type { OverviewCardProps } from "../../lib/types/AnimeTypes.ts";
 import StatusChart from "./StatusChart.tsx";
 
 export default function OverviewCard({ description, externalLinks, statusDistribution, isDark }: OverviewCardProps) {
+  const parsedStatus = JSON.parse(statusDistribution);
+  <StatusChart statusData={parsedStatus} />;
+
+  console.log("OverviewCard", statusDistribution);
   return (
     <div
       className={`flex flex-col gap-6 p-4 rounded-lg text-start ${isDark ? "bg-primary-600/50" : "bg-primary-700/50"}`}
@@ -31,10 +35,13 @@ export default function OverviewCard({ description, externalLinks, statusDistrib
         ))}
       </div>
 
-      <div className="w-full w-full  h-[15rem]">
-        <h2 className="text-2xl font-semibold mb-4 text-primary-500">Watcher's Details</h2>
-        <StatusChart statusData={statusDistribution} />
+      <h2 className="text-2xl font-semibold mb-4 text-primary-500">Watcher's Details</h2>
+
+      <div className={`h-full w-[19rem] `}>
+        <StatusChart statusData={parsedStatus} />
+
       </div>
+
     </div>
   );
 }
