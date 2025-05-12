@@ -42,7 +42,7 @@ function StatusChart({ statusData }: StatusDataProps) {
   const options: ChartOptions<"pie"> = {
     plugins: {
       legend: {
-        position: "left",
+        position: "top",
         labels: {
           color: "#fff",
           font: {

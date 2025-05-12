@@ -34,7 +34,7 @@ export default function OverviewCard({ description, externalLinks, statusDistrib
 
       <h2 className="text-2xl font-semibold mb-4 text-primary-500">Watcher's Details</h2>
 
-      <div className={`h-full w-[19rem] `}>
+      <div className={`h-full w-[15rem] md:w-[19rem] `}>
         <StatusChart statusData={statusDistribution} />
 
       </div>
