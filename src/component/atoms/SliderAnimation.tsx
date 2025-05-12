@@ -6,8 +6,8 @@ import type { SliderAnimationTypes } from "../../lib/types/AnimeTypes";
 function SimpleCreativeSlider({ text, scrollContainerRef, className = "" }: SliderAnimationTypes) {
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [progress, setProgress] = useState<number>(0);
+  const [_isScrolling, setIsScrolling] = useState(false);
+  const [_progress, setProgress] = useState<number>(0);
   const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const observerRef = useRef<MutationObserver | null>(null);
 
@@ -17,13 +17,13 @@ function SimpleCreativeSlider({ text, scrollContainerRef, className = "" }: Slid
       setIsAtStart(scrollLeft <= 5);
       setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - 6);
       setProgress((scrollLeft / (scrollWidth - clientWidth)) * 100 || 0);
-      console.log(progress);
+      // console.log(progress);
 
       if (scrollTimerRef.current)
         clearTimeout(scrollTimerRef.current);
       setIsScrolling(true);
       scrollTimerRef.current = setTimeout(() => setIsScrolling(false), 500);
-      console.log(isScrolling);
+      // console.log(isScrolling);
     }
   };
 

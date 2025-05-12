@@ -5,42 +5,34 @@ import StatusChart from "./StatusChart.tsx";
 export default function OverviewCard({ description, externalLinks, statusDistribution, isDark }: OverviewCardProps) {
   return (
     <div
-      className={`flex flex-col gap-6  p-4 rounded-lg   text-start  ${isDark ? "bg-primary-600/50" : "bg-primary-700/50"}  `}
+      className={`flex flex-col gap-6 p-4 rounded-lg text-start ${isDark ? "bg-primary-600/50" : "bg-primary-700/50"}`}
     >
-      <h2 className="text-2xl font-semibold mb-6 text-primary-500">Description</h2>
-      <div
-        className="text-zinc-300 text-sm sm:text-base"
-      >
-        {description?.replace(/<[^>]+>/g, "")}
+      <h2 className="text-2xl font-semibold mb-4 text-primary-500">Description</h2>
+      <div className="text-white text-sm sm:text-lg">
+        {description?.replace(/<[^>]+>/g, "") || "No description available."}
       </div>
+
       <h2 className="text-2xl font-semibold text-primary-500">External Links</h2>
       <div className="flex flex-wrap gap-2 sm:gap-3">
-        {externalLinks.map((link: string | any, index: number) => (
-          <div key={index}>
-            <a
-              key={link?.url}
-              href={link?.url}
-              target="_blank"
-              rel="noreferrer"
-              className={` hover:bg-primary-600 px-3 py-2 sm:px-4 rounded-r-md text-xs sm:text-sm flex items-center gap-4 rounded-md`}
-              style={link?.color ? { backgroundColor: link.color } : { backgroundColor: "#38bb8c" }}
-            >
-              {link?.icon && (
-                <img
-                  src={link?.icon}
-                  alt=""
-                  className="h-[1rem] w-[1rem] rounded-lg "
-                />
-              )}
-              {link?.site}
-            </a>
-          </div>
+        {externalLinks.map((link: any, index: number) => (
+          <a
+            key={index}
+            href={link?.url}
+            target="_blank"
+            rel="noreferrer"
+            className="hover:bg-primary-600 px-3 py-2 sm:px-4 text-xs sm:text-sm flex items-center gap-3 rounded-md"
+            style={{ backgroundColor: link?.color || "#38bb8c" }}
+          >
+            {link?.icon && (
+              <img src={link.icon} alt="" className="h-4 w-4 rounded-lg" />
+            )}
+            {link?.site}
+          </a>
         ))}
       </div>
-      <div className="h-[15rem] w-[25rem] ">
-        <h2 className="text-2xl font-semibold mb-6 text-primary-500">
-          Watcher's Details
-        </h2>
+
+      <div className="w-full w-full  h-[15rem]">
+        <h2 className="text-2xl font-semibold mb-4 text-primary-500">Watcher's Details</h2>
         <StatusChart statusData={statusDistribution} />
       </div>
     </div>
