@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { get } from "lodash";
 import { FaStar } from "react-icons/fa";
 
-import type { DynamicCharacterCardProps } from "../../../../lib/types/AnimeTypes.ts";
+import type { DynamicCharacterCardProps } from "../../lib/types/AnimeTypes.ts";
 
-import { useTheme } from "../../../../hooks/useTheme.tsx";
+import { useTheme } from "../../hooks/useTheme.tsx";
 
 function CharacterCard({ data, keys, onClick }: DynamicCharacterCardProps) {
   const { isDark } = useTheme();

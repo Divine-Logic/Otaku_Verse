@@ -111,3 +111,25 @@ export type RecommedationAnimeProps = {
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
 };
+
+export type DetailsPartProps = {
+  coverImage: string;
+  englishTitle: string;
+  romajiTitle: string;
+  nativeTitle: string;
+  genration: string[];
+  averageScore: number;
+  popularity: number;
+  favourites: number;
+  status: string;
+  format: string;
+  isDark: boolean;
+  volumes: number;
+  chapters: string[];
+};
+export type OverviewCardProps = {
+  description: string;
+  externalLinks: string[];
+  statusDistribution: string;
+  isDark: boolean;
+};

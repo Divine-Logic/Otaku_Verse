@@ -21,6 +21,10 @@ export const ANIME_DETAIL_QUERY = `
     episodes
     genres
     averageScore
+     chapters
+    volumes
+    popularity
+    favourites
     status
     format
     trailer {
@@ -49,6 +53,18 @@ export const ANIME_DETAIL_QUERY = `
           }
         }
       }
+    }
+     stats {
+      statusDistribution {
+        status
+        amount
+      }
+    }
+      externalLinks {
+      site
+      url
+      icon
+      color
     }
     staff(page: $page, sort: [RELEVANCE]) {
       edges {

@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { motion } from "framer-motion";
 
-import type { CharacterCardArgs } from "../../../../lib/types/AnimeTypes.ts";
+import type { CharacterCardArgs } from "../../lib/types/AnimeTypes.ts";
 
-export default function AnimeCharacterCard({
+export default function CharacterCard({
   id,
   role,
   coverImage1,
