@@ -133,11 +133,11 @@ export type OverviewCardProps = {
   statusDistribution: string;
   isDark: boolean;
 };
-
-type StatusItem = {
+export type StatusItem = {
   status: string;
   amount: number;
 };
+
 export type StatusDataProps = {
-  statusData: StatusItem[];
+  statusData: StatusItem[] | string;
 };
