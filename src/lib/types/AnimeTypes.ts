@@ -86,7 +86,7 @@ export type CharacterCardArgs = {
   englishName?: string;
   nativeName?: string;
   isDark: boolean;
-  handleOpenCharacterModal: (id: number) => void;
+  handleOpenCharacterModal: (id: number | null | undefined) => void;
 };
 
 export type SwitchToggleButton = {
@@ -102,4 +102,12 @@ export type StaffCardProps = {
   role: string;
   index: number;
   isDark: boolean;
+};
+export type RecommedationAnimeProps = {
+  data: any[];
+  text: string;
+  isLoading: boolean;
+  fetchNextPage: () => void;
+  hasNextPage: boolean;
+  isFetchingNextPage: boolean;
 };

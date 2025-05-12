@@ -32,7 +32,7 @@ export type MangaCharacterProps = {
 };
 
 export type MangaCardProps = {
-  id?: number | null;
+  id: number | null;
   coverImage1?: string;
   coverImage2?: string;
   status?: string;

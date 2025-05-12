@@ -8,7 +8,7 @@ type TabButtonProps = {
   isDark: boolean;
 };
 
-const TabButton: React.FC<TabButtonProps> = ({ tabs, activeTab, setActiveTab, isDark }) => {
+function TabButton({ tabs, activeTab, setActiveTab, isDark }: TabButtonProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -64,6 +64,6 @@ const TabButton: React.FC<TabButtonProps> = ({ tabs, activeTab, setActiveTab, is
       </nav>
     </div>
   );
-};
+}
 
 export default TabButton;

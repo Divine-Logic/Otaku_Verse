@@ -1,6 +1,6 @@
 import Card from "../../../component/atoms/Card.tsx";
 import { usePopularAnime } from "../../../services/product/apis/anime/PopulerAnime.ts";
-import { useRecommendAnime } from "../../../services/product/apis/anime/recommendAnime.ts";
+import { useRecommendAnime } from "../../../services/product/apis/anime/RecommendAnime.ts";
 import { useTrendingAnime } from "../../../services/product/apis/anime/TrendinAnime.ts";
 import PopularAnime from "./component/PopularAnime.tsx";
 import RecommendingAnime from "./component/RecommendingAnime.tsx";

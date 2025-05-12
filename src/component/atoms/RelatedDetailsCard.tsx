@@ -28,7 +28,7 @@ function RelatedDetailsCard({
         />
 
         <div
-          className="absolute top-3 left-3 z-10 bg-primary-700/50 backdrop-blur-md px-3 py-1 rounded-xl border border-white/20 text-[10px] uppercase tracking-widest text-white font-bold shadow-md"
+          className="absolute top-3 left-3 z-10 bg-primary-500/80 backdrop-blur-md px-3 py-1 rounded-xl border border-white/20 text-[10px] uppercase tracking-widest text-white font-bold shadow-md"
         >
           {type}
         </div>

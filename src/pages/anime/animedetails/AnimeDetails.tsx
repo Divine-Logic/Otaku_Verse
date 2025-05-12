@@ -31,8 +31,8 @@ function AnimeDetails() {
   const tabLabels: string[] = ["overview", "Cast", "staff"];
   console.log("THIS IS ANIME DATA", data?.staff?.edges);
 
-  const handleOpenCharacterModal = useCallback((id: number | null) => {
-    setCharacterId(id);
+  const handleOpenCharacterModal = useCallback((id: number | null | undefined) => {
+    setCharacterId(id ?? null);
     setIsModalOpen(true);
   }, []);
 

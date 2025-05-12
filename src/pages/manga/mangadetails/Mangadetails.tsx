@@ -9,6 +9,7 @@ import type { PopularityProps } from "../../../lib/types/MangaTypes.ts";
 import Loader from "../../../component/atoms/Loader.tsx";
 import RelatedDetailsCard from "../../../component/atoms/RelatedDetailsCard.tsx";
 import { StaffCard } from "../../../component/atoms/StaffCard.tsx";
+import StatusChart from "../../../component/atoms/StatusChart.tsx";
 import TabButton from "../../../component/atoms/TabButton.tsx";
 import { useTheme } from "../../../hooks/useTheme.tsx";
 import { useMangaDetails } from "../../../services/product/apis/mangaApi/MangaDetails.ts";
@@ -28,8 +29,8 @@ function MangaDetails() {
 
   const tabLabels: string[] = ["overview", "Cast", "staff", "related"];
   const manga: any = data;
-  const handleOpenCharacterModal = useCallback((id: number | null) => {
-    setCharacterId(id);
+  const handleOpenCharacterModal = useCallback((id: number | null | undefined) => {
+    setCharacterId(id ?? null);
     setIsModalOpen(true);
   }, []);
 
@@ -37,7 +38,7 @@ function MangaDetails() {
     setIsModalOpen(false);
     setTimeout(() => setCharacterId(null), 200);
   }, []);
-  console.log(`this is staff details`, manga);
+  console.log(`this is staff details`, data);
 
   return isLoading
     ? <Loader />
@@ -71,8 +72,10 @@ function MangaDetails() {
                     className="rounded-lg shadow-lg  w-48 md:w-[20rem] object-cover"
                   />
                 </div>
-                <div className="w-full md:w-3/4">
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-center sm:text-left">{manga.title.english || manga.title.romaji}</h1>
+                <div
+                  className="w-full md:w-3/4"
+                >
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-center sm:text-left text-primary-500">{manga.title.english || manga.title.romaji}</h1>
                   <p className="text-primary-500 mb-4 italic text-center md:text-left">{manga.title.native}</p>
                   <div className="flex flex-wrap gap-2 mb-6 justify-center md:justify-start">
                     {manga.genres.map((genre: any) => (
@@ -105,10 +108,12 @@ function MangaDetails() {
                     </div>
                   </div>
                   <div className="flex  gap-[10rem]">
-                    <div className="flex flex-col gap-[2rem]">
+                    <div
+                      className={`flex flex-col gap-[2rem] ${isDark ? "text-white" : "text-primary-600"}   `}
+                    >
                       <div>
                         <p className="text-primary-500">Status</p>
-                        <p className="font-medium">{manga.status}</p>
+                        <p className="font-medium ">{manga.status}</p>
                       </div>
                       <div>
                         <p className="text-primary-500">Format</p>
@@ -141,7 +146,7 @@ function MangaDetails() {
               <div className="mt-6">
                 {activeTab === "overview" && (
                   <div
-                    className={`flex flex-col gap-3  p-4 rounded-lg    ${isDark ? "bg-primary-600/50" : "bg-primary-700/20"}  `}
+                    className={`flex flex-col gap-3  p-4 rounded-lg    ${isDark ? "bg-primary-600/50" : "bg-primary-700/50"}  `}
                   >
                     <h2 className="text-2xl font-semibold mb-6 text-primary-500">Description</h2>
                     <div
@@ -149,31 +154,35 @@ function MangaDetails() {
                     >
                       {manga.description?.replace(/<[^>]+>/g, "")}
                     </div>
-                    <h2 className="text-2xl font-semibold mb-6 text-primary-500">External Links</h2>
+                    <h2 className="text-2xl font-semibold text-primary-500">External Links</h2>
                     <div className="flex flex-wrap gap-2 sm:gap-3">
                       {manga.externalLinks.map((link: string | any, index: number) => (
                         <div key={index}>
                           <a
-                            key={link.url}
-                            href={link.url}
+                            key={link?.url}
+                            href={link?.url}
                             target="_blank"
                             rel="noreferrer"
-                            className="bg-primary-600/50 hover:bg-primary-600 px-3 py-2 sm:px-4 rounded-r-md text-xs sm:text-sm flex items-center"
-                            style={{ borderLeft: `4px solid ${link.color || "#38bb8c"} rounded-md` }}
+                            className={` hover:bg-primary-600 px-3 py-2 sm:px-4 rounded-r-md text-xs sm:text-sm flex items-center gap-4 rounded-md`}
+                            style={link?.color ? { backgroundColor: link.color } : { backgroundColor: "#38bb8c" }}
                           >
-                            {(`${link.icon}`)
-                              ? (
-                                  <img
-                                    src={link.icon}
-                                    alt=""
-                                    className="h-[2rem] w-[2rem] rounded-lg "
-                                  />
-                                )
-                              : ""}
-                            {link.site}
+                            {link?.icon && (
+                              <img
+                                src={link?.icon}
+                                alt=""
+                                className="h-[1rem] w-[1rem] rounded-lg "
+                              />
+                            )}
+                            {link?.site}
                           </a>
                         </div>
                       ))}
+                    </div>
+                    <div className="h-[15rem] w-[25rem] ">
+                      <h2 className="text-2xl font-semibold mb-6 text-primary-500">
+                        Watcher's Details
+                      </h2>
+                      <StatusChart statusData={manga?.stats?.statusDistribution} />
                     </div>
                   </div>
                 )}
@@ -182,14 +191,14 @@ function MangaDetails() {
                   <div
                     className="flex flex-wrap gap-4"
                   >
-                    {manga.characters.edges.map((character: PopularityProps) => (
+                    {manga.characters?.edges.map((character: PopularityProps) => (
                       <AnimeCharacterCard
-                        key={character.node.id}
-                        id={character.node.id}
-                        coverImage1={character.node.image.large}
-                        role={character.role}
-                        englishName={character.node.name.full}
-                        nativeName={character.node.name.native}
+                        key={character?.node?.id}
+                        id={character?.node?.id}
+                        coverImage1={character?.node?.image?.large}
+                        role={character?.role}
+                        englishName={character?.node?.name?.full}
+                        nativeName={character?.node?.name?.native}
                         isDark={false}
                         handleOpenCharacterModal={handleOpenCharacterModal}
                       />

@@ -1,17 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
-import type { SliderAnimationTypes } from "../../lib/types/AnimeTypes.ts";
+import type { SliderAnimationTypes } from "../../lib/types/AnimeTypes";
 
-function SliderAnimation({ text, scrollContainerRef, className }: SliderAnimationTypes) {
+function SimpleCreativeSlider({ text, scrollContainerRef, className = "" }: SliderAnimationTypes) {
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [progress, setProgress] = useState<number>(0);
+  const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const observerRef = useRef<MutationObserver | null>(null);
 
-  const updateArrows = () => {
+  const updateScrollState = () => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setIsAtStart(scrollLeft === 0);
-      setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - 1);
+      setIsAtStart(scrollLeft <= 5);
+      setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - 6);
+      setProgress((scrollLeft / (scrollWidth - clientWidth)) * 100 || 0);
+      console.log(progress);
+
+      if (scrollTimerRef.current)
+        clearTimeout(scrollTimerRef.current);
+      setIsScrolling(true);
+      scrollTimerRef.current = setTimeout(() => setIsScrolling(false), 500);
+      console.log(isScrolling);
     }
   };
 
@@ -24,14 +36,35 @@ function SliderAnimation({ text, scrollContainerRef, className }: SliderAnimatio
   };
 
   useEffect(() => {
-    updateArrows();
-    scrollContainerRef.current?.addEventListener("scroll", updateArrows);
-    window.addEventListener("resize", updateArrows);
+    const scrollElement = scrollContainerRef.current;
+    if (scrollElement) {
+      updateScrollState();
+      scrollElement.addEventListener("scroll", updateScrollState);
+      window.addEventListener("resize", updateScrollState);
+
+      observerRef.current = new MutationObserver(() => {
+        setTimeout(updateScrollState, 100);
+      });
+
+      observerRef.current.observe(scrollElement, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+      });
+
+      return () => {
+        scrollElement.removeEventListener("scroll", updateScrollState);
+        window.removeEventListener("resize", updateScrollState);
+        observerRef.current?.disconnect?.();
+        if (scrollTimerRef.current)
+          clearTimeout(scrollTimerRef.current);
+      };
+    }
   }, []);
 
   return (
     <div className={`flex justify-between items-center ${className}`}>
-      <h1>{`${text}`}</h1>
+      <h2>{text}</h2>
       <div className="md:flex hidden items-center gap-2">
         <button
           onClick={scrollLeft}
@@ -58,4 +91,4 @@ function SliderAnimation({ text, scrollContainerRef, className }: SliderAnimatio
   );
 }
 
-export default SliderAnimation;
+export default SimpleCreativeSlider;
