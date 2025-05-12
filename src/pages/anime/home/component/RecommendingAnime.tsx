@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+import type { RecommedationAnimeProps } from "../../../../lib/types/AnimeTypes.ts";
+
 import AnimeCard from "../../../../component/atoms/AnimeCard.tsx";
 import Card from "../../../../component/atoms/Card.tsx";
 import SkeletonAnimeCard from "../../../../component/atoms/SkeletonAnimeCard.tsx";
@@ -13,14 +15,7 @@ function RecommendingAnime({
   fetchNextPage,
   hasNextPage,
   isFetchingNextPage,
-}: {
-  data: any[];
-  text: string;
-  isLoading: boolean;
-  fetchNextPage: () => void;
-  hasNextPage: boolean;
-  isFetchingNextPage: boolean;
-}) {
+}: RecommedationAnimeProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();

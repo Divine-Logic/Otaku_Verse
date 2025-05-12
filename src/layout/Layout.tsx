@@ -21,7 +21,7 @@ function Layout() {
 
     : (
         <div
-          className={classNames("bg-primary-700 flex flex-col w-full p-[0.8rem] sm:p-[2rem]  min-h-screen gap-[2rem] relative ", { "bg-white": !isDark })}
+          className={classNames("bg-primary-700 flex flex-col w-full p-[0.8rem] sm:p-[2rem]  min-h-screen gap-[2rem] relative ", { "bg-white brightness-80": !isDark })}
         >
 
           <Header />
