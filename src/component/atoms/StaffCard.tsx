@@ -1,9 +1,8 @@
+import classNames from "classnames";
 import { motion } from "framer-motion";
 import { memo } from "react";
 
 import type { StaffCardProps } from "../../lib/types/AnimeTypes.ts";
-
-import { classNames } from "../../utils/classNames.ts";
 
 export const StaffCard = memo(({
   img,

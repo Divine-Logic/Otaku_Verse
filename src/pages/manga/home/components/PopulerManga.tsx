@@ -5,9 +5,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import Card from "../../../../component/atoms/Card.tsx";
 import MangaCard from "../../../../component/atoms/MangaCard.tsx";
+import MangaSkeleton from "../../../../component/atoms/MangaSkeleton.tsx";
 import SliderAnimation from "../../../../component/atoms/SliderAnimation.tsx";
 import { usePopularManga } from "../../../../services/product/apis/mangaApi/PopulerManga.ts";
-import MangaSkeleton from "./MangaSkeleton.tsx";
 
 export default function PopularManga() {
   const { data, isLoading, isError } = usePopularManga();
