@@ -1,13 +1,11 @@
 import { useCallback, useState } from "react";
-import { FaStar } from "react-icons/fa";
-import { ImFire } from "react-icons/im";
-import { MdOutlineFavorite } from "react-icons/md";
 import { useParams } from "react-router-dom";
 
 import type { PopularityProps } from "../../lib/types/MangaTypes.ts";
 
 import CharacterCard from "../../component/atoms/CharacterCard.tsx";
 import CharacterDetailsCard from "../../component/atoms/CharacterDetailsCard.tsx";
+import DetailsPart from "../../component/atoms/DetailsPart.tsx";
 import Loader from "../../component/atoms/Loader.tsx";
 import OverviewCard from "../../component/atoms/OverviewCard.tsx";
 import RelatedDetailsCard from "../../component/atoms/RelatedDetailsCard.tsx";
@@ -26,6 +24,7 @@ function MangaDetails() {
 
   const tabLabels: string[] = ["overview", "Cast", "staff", "related"];
   const manga: any = data;
+  console.log("this is releted data", manga);
 
   const handleOpenCharacterModal = useCallback((id: number | null | undefined) => {
     setCharacterId(id ?? null);
@@ -62,78 +61,21 @@ function MangaDetails() {
             )}
 
             <div className="mx-auto px-4 py-6 relative">
-              <div className="flex flex-col md:flex-row gap-8">
-                <div className="w-full md:w-1/4 flex justify-center md:block">
-                  <img
-                    src={manga.coverImage.extraLarge}
-                    alt={manga.title.romaji}
-                    className="rounded-lg shadow-lg w-48 md:w-[20rem] object-cover"
-                  />
-                </div>
-                <div className="w-full md:w-3/4">
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-center sm:text-left text-primary-500">
-                    {manga.title.english || manga.title.romaji}
-                  </h1>
-                  <p className="text-primary-500 mb-4 italic text-center md:text-left">
-                    {manga.title.native}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-6 justify-center md:justify-start">
-                    {manga.genres.map((genre: any) => (
-                      <div
-                        key={genre}
-                        className="bg-primary-600 px-3 py-1 rounded-full text-xs sm:text-sm"
-                      >
-                        {genre}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
-                    <div
-                      className="flex items-center gap-2 text-yellow-400 justify-center md:justify-start"
-                    >
-                      <FaStar />
-                      <span>{manga.averageScore / 10}</span>
-                    </div>
-                    <div
-                      className="flex items-center gap-2 text-orange-400 justify-center md:justify-start"
-                    >
-                      <ImFire />
-                      <span>{manga.popularity}</span>
-                    </div>
-                    <div
-                      className="flex items-center gap-2 text-red-500 justify-center md:justify-start"
-                    >
-                      <MdOutlineFavorite />
-                      <span>{manga.favourites}</span>
-                    </div>
-                  </div>
-                  <div className="flex gap-[10rem]">
-                    <div
-                      className={`flex flex-col gap-[2rem] ${isDark ? "text-white" : "text-primary-600"}`}
-                    >
-                      <div>
-                        <p className="text-primary-500">Status</p>
-                        <p className="font-medium">{manga.status}</p>
-                      </div>
-                      <div>
-                        <p className="text-primary-500">Format</p>
-                        <p className="font-medium">{manga.format}</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-[2rem]">
-                      <div>
-                        <p className="text-primary-500">Chapters</p>
-                        <p className="font-medium">{manga.chapters ?? "N/A"}</p>
-                      </div>
-                      <div>
-                        <p className="text-primary-500">Vol.</p>
-                        <p>{manga.volumes ?? "N/A"}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+              <DetailsPart
+                coverImage={manga.coverImage.extraLarge}
+                englishTitle={manga.title.english}
+                romajiTitle={manga.title.romaji}
+                nativeTitle={manga.title.native}
+                genration={manga.genres}
+                averageScore={manga.averageScore}
+                popularity={manga.popularity}
+                favourites={manga.favourites}
+                status={manga.status}
+                format={manga.format}
+                isDark={isDark}
+                volumes={manga.volumes}
+                chapters={manga.chapters}
+              />
               <TabButton tabs={tabLabels} activeTab={activeTab} setActiveTab={setActiveTab} isDark={isDark} />
 
               <div className="mt-6">

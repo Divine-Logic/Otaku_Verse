@@ -13,36 +13,41 @@ function TabButton({ tabs, activeTab, setActiveTab, isDark }: TabButtonProps) {
 
   return (
     <div className="mt-8 relative">
-      <div className="md:hidden ">
+      <div className="relative md:hidden">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`w-full flex items-center justify-between py-3 px-4 bg-primary-600 `}
+          className={`w-full flex items-center justify-between py-3 px-4 bg-primary-600 text-white shadow transition-all duration-300  ${isMenuOpen ? "rounded-t-lg" : "rounded-lg"} `}
         >
-          <div className="font-medium rounded-lg">
+          <span className="font-semibold tracking-wide text-base">
             {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-          </div>
-          <IoIosArrowDown />
+          </span>
+          <IoIosArrowDown
+            className={`text-xl transition-transform duration-300 ${isMenuOpen ? "rotate-180" : ""}`}
+          />
         </button>
-        {isMenuOpen && (
-          <div className="absolute z-10 w-full left-0 bg-primary-600 ">
-            {tabs.map(tab => (
-              <button
-                key={tab}
-                onClick={() => {
-                  setActiveTab(tab);
-                  setIsMenuOpen(false);
-                }}
-                className={`block w-full text-left px-4 py-3 ${
-                  activeTab === tab
-                    ? "bg-primary-500"
-                    : "bg-primary-600"
-                }`}
-              >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </button>
-            ))}
-          </div>
-        )}
+
+        <div
+          className={`absolute z-20 w-full left-0 bg-primary-600  overflow-hidden shadow-lg transition-all duration-300 ${
+            isMenuOpen ? "max-h-[500px] opacity-100 rounded-b-lg" : "max-h-0 opacity-0 pointer-events-none rounded--lg"
+          }`}
+        >
+          {tabs.map(tab => (
+            <button
+              key={tab}
+              onClick={() => {
+                setActiveTab(tab);
+                setIsMenuOpen(false);
+              }}
+              className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors duration-200 ${
+                activeTab === tab
+                  ? "bg-primary-500 text-white"
+                  : "hover:bg-primary-500 text-white"
+              }`}
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
+          ))}
+        </div>
       </div>
 
       <nav className="hidden md:flex gap-4">
