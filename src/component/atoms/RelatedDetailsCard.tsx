@@ -10,15 +10,24 @@ function RelatedDetailsCard({
   title2,
   status,
   type,
+
 }: RelatedCardProps) {
   const navigate = useNavigate();
+  const handleNavigation = (id: number | null, status: string) => {
+    console.log(id, status);
+    if (status === "MANGA") {
+      navigate(`/manga/${id}`);
+    }
+    else {
+      navigate(`/anime/${id}`);
+    }
+  };
+
   return (
     <div
       key={key}
       className="group relative cursor-pointer rounded-3xl overflow-hidden bg-[#1a1a2e]  transition-transform duration-500 hover:scale-105"
-      onClick={() => {
-        navigate(`/manga/${id}`);
-      }}
+      onClick={() => handleNavigation(id, status)}
     >
       <div className="relative">
         <img
