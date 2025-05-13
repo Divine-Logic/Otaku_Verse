@@ -28,7 +28,8 @@ AniList API
 🚀 Getting Started
 
 npm install
+
 npm run dev
 
 📦 API Reference
-AniList GraphQL Docs: https://anilist.github.io/ApiV2-GraphQL-Docs/
+AniList GraphQL Docs: https://docs.anilist.co
