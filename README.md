@@ -10,7 +10,7 @@ interactive experience with real-time data fetching and clean UI.
 
 📖 Real-time data via GraphQL queries
 
-🧩 Built with React, TypeScript, and Apollo Client
+🧩 Built with React, TypeScript, TailwindCSS and Apollo Client
 
 🌐 Responsive and optimized for all devices
 
@@ -21,7 +21,6 @@ React + TypeScript
 
 Apollo Client (GraphQL)
 
-TailwindCSS (optional, depending on your setup)
 
 AniList API
 
