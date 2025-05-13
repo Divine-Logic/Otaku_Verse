@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 
 import Card from "../../../../component/atoms/Card";
 import MangaCard from "../../../../component/atoms/MangaCard.tsx";
+import MangaSkeleton from "../../../../component/atoms/MangaSkeleton.tsx";
 import SliderAnimation from "../../../../component/atoms/SliderAnimation";
 import { useTrendingManga } from "../../../../services/product/apis/mangaApi/TrendingManga.ts";
-import MangaSkeleton from "./MangaSkeleton";
 
 function RecommendedManga() {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useTrendingManga();
