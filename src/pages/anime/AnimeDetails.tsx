@@ -142,7 +142,7 @@ function AnimeDetails() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.1 }}
-                          className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-8 mx-auto"
+                          className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6  2xl:grid-cols-7 gap-8 mx-auto"
                         >
                           {data?.characters?.edges?.map((item: any, index: number) => (
                             <CharacterCard
