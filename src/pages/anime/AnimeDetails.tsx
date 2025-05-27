@@ -164,7 +164,7 @@ function AnimeDetails() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.2 }}
-                          className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  3xl:grid-cols-6 gap-8 mx-auto"
+                          className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  3xl:grid-cols-6 gap-8 mx-auto"
                         >
 
                           {data?.staff?.edges?.map((item: any, index: number) => (
