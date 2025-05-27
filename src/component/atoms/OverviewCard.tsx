@@ -6,7 +6,7 @@ export default function OverviewCard({ description, externalLinks, statusDistrib
   console.log("OverviewCard", statusDistribution);
   return (
     <div
-      className={`min-w-[95vw] flex flex-col gap-6 p-4 rounded-lg text-start ${isDark ? "bg-primary-600/50" : "bg-primary-700/50"}`}
+      className={`w-full flex flex-col gap-6 p-4 rounded-lg text-start ${isDark ? "bg-primary-600/50" : "bg-primary-700/50"}`}
     >
       <h2 className="text-2xl font-semibold mb-4 text-primary-500">Description</h2>
       <div className="text-white text-sm sm:text-lg">

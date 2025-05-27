@@ -16,7 +16,7 @@ export const StaffCard = memo(({
     animate={{ opacity: 1, y: 0 }}
     whileHover={{ scale: 1.005, y: -1 }}
     className={classNames(
-      "relative min-w-full sm:min-w-[24rem] flex items-center gap-4 p-5 rounded-2xl backdrop-blur-md shadow-lg overflow-hidden group transition-all duration-300",
+      "relative min-w-full flex items-center gap-4 p-5 rounded-2xl backdrop-blur-md shadow-lg overflow-hidden group transition-all duration-300",
       isDark
         ? "bg-gradient-to-br from-[#001e25] to-[#115039] hover:shadow-[0_0_20px_#38bb8c40]"
         : "bg-gradient-to-br from-[#e6fdf4] to-[#c9f7e4] hover:shadow-[0_0_20px_#38bb8c40]",
