@@ -33,7 +33,7 @@ function RelatedDetailsCard({
         <img
           src={img}
           alt="not found"
-          className="w-full h-64 object-fill rounded-t-3xl group-hover:brightness-110 transition duration-500"
+          className="w-full h-64 object-cover rounded-t-3xl group-hover:brightness-110 transition duration-500"
         />
 
         <div
