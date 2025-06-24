@@ -90,7 +90,7 @@ function MangaDetails() {
 
                 {activeTab === "Cast" && (
                   <div
-                    className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6  3xl:grid-cols-7 gap-8 mx-auto"
+                    className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  3xl:grid-cols-6 gap-8 mx-auto"
                   >
                     {manga.characters?.edges.map((character: PopularityProps) => (
                       <CharacterCard
