@@ -97,7 +97,7 @@ function MangaDetails() {
                         key={character?.node?.id}
                         id={character?.node?.id}
                         coverImage1={character?.node?.image?.large}
-                        role={character?.role}
+                        // role={character?.role}
                         englishName={character?.node?.name?.full}
                         nativeName={character?.node?.name?.native}
                         isDark={false}
